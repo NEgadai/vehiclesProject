@@ -6,9 +6,7 @@ import Vehicles.Bike;
 import Vehicles.Car;
 import Vehicles.Carriage;
 import Vehicles.Color;
-import Vehicles.Direction;
-import Vehicles.Engine;
-import Vehicles.Location;
+
 import Vehicles.Point;
 import Vehicles.Vehicle;
 import Vehicles.benzineEngine;
@@ -16,6 +14,7 @@ import Vehicles.solarEngine;
 
 public class mySystem {
 	public void drive(int carID, Point point){
+		
 	}
 	
 	public static void main(String []args){
@@ -101,8 +100,17 @@ public class mySystem {
 			}
 			
 		}
-		for(int i=0;i<size;i++){
-			System.out.println(vehicles[i]);
+		int choose = 0;
+		while(choose != -1){
+			for(int i=0;i<size;i++){
+				System.out.println(i+" -> "+vehicles[i]);
+			}
+			System.out.println("Choose from the vehicles with which one you want to work:");
+			choose = sc.nextInt();
+			if(choose > vehicles.length-1 || choose < -1){
+				System.exit(0);
+			}
+			
 		}
 	}
 }
