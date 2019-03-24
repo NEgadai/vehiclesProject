@@ -124,14 +124,14 @@ public class mySystem {
 	    return result;
 	}
 	public static boolean setZonePoints(){
-		int x = 0,y = 0;
+		float x = 0,y = 0;
 		System.out.println("Enter 4 points for create the polygon that the vehicles can drive there:");
 		for(int i=0;i<4;i++){
 			System.out.println("The "+(i+1)+" point:");
 			System.out.println("Enter the x parameter:");
-			x = sc.nextInt();
+			x = sc.nextFloat();
 			System.out.println("Enter the y parameter:");
-			y = sc.nextInt();
+			y = sc.nextFloat();
 			zone[i] = new Point(x,y);
 		}
 		if(!zone[0].isEquals(zone[1]) && !zone[1].isEquals(zone[2]) && !zone[2].isEquals(zone[3]) && !zone[0].isEquals(zone[3]))
