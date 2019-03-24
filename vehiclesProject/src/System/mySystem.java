@@ -13,24 +13,48 @@ import Vehicles.benzineEngine;
 import Vehicles.solarEngine;
 
 public class mySystem {
-	public void drive(int carID, Point point){
-		
+	private static Point[] zone = new Point[4];
+	private static boolean zoneCreated;
+	public static boolean drive(int carID, Point point){
+		return true;
 	}
-	
+	public static boolean validationPoint(Point point){
+		if(zoneCreated == false)
+			return false;
+		return true;
+	}
+	public static boolean setZonePoints(){
+		Scanner sc = new Scanner(System.in);
+		int x = 0,y = 0;
+		System.out.println("Enter point for create the zone that the vehicles can drive there:");
+		System.out.println("Enter the x parameter:");
+		x = sc.nextInt();
+		System.out.println("Enter the y parameter:");
+		y = sc.nextInt();
+		if(x == 0 || y == 0){
+			return false;
+		}
+		zone[0] = new Point(Math.abs(x*1000),Math.abs(y*1000));
+		zone[1] = new Point(zone[0].getX()*(-1),zone[0].getY());
+		zone[2] = new Point(zone[0].getX(),zone[0].getY()*(-1));
+		zone[3] = new Point(zone[0].getX()*(-1),zone[0].getY()*(-1));
+		return true;
+	}
 	public static void main(String []args){
 		Scanner sc = new Scanner(System.in);
 		int ID, fuel, minimumAge, numberOfPassagers, typeOfEngine, numberOfWheels, numberOfGears;
 		Color color;
 		float KM;
 		String animal;
+		zoneCreated=setZonePoints();
 		System.out.println("Enter the size of the array:");
 		int size = sc.nextInt();
 		Vehicle[] vehicles = new Vehicle[size];
 		for(int i=0;i<size;i++){
-			System.out.println("Enter the details of the "+i+" car:");
+			System.out.println("Enter the details of the "+(i+1)+" car:");
 			System.out.println("Enter Y if the car is motorized or N if not:");
 			String motor = sc.next();
-			if(motor.equals("Y")){
+			if(motor.equals("Y") || motor.equals("y")){
 				System.out.println("Choose the engine option:");
 				System.out.println("1.Car.");
 				System.out.println("Input - ");
@@ -103,10 +127,11 @@ public class mySystem {
 		int choose = 0;
 		while(choose != -1){
 			for(int i=0;i<size;i++){
-				System.out.println(i+" -> "+vehicles[i]);
+				System.out.println((i+1)+" -> "+vehicles[i]);
 			}
 			System.out.println("Choose from the vehicles with which one you want to work:");
 			choose = sc.nextInt();
+			choose--;
 			if(choose > vehicles.length-1 || choose < -1){
 				System.exit(0);
 			}
