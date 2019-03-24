@@ -1,18 +1,20 @@
 package System;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import Vehicles.Bike;
 import Vehicles.Car;
 import Vehicles.Carriage;
 import Vehicles.Color;
-
 import Vehicles.Point;
 import Vehicles.Vehicle;
 import Vehicles.benzineEngine;
 import Vehicles.solarEngine;
 
 public class mySystem {
+	private static Map<Integer, Vehicle> IDtoVehicle = new HashMap<Integer, Vehicle>();
 	private static int size;
 	private static Scanner sc = new Scanner(System.in);
 	private static Vehicle[] vehicles;
@@ -23,13 +25,9 @@ public class mySystem {
 			System.out.println("(*) The point is not valid.");
 			return false;
 			}
-		for(int i=0;i<size;i++){
-			if (vehicles[i].getID() == carID){
-				boolean result = vehicles[i].drive(point);
-				if(result == false)
-					System.out.println("(*) Couldn't make drive.");
-				return result;
-				}
+		if(!IDtoVehicle.get(carID).drive(point)){
+			System.out.println("(*) Couldn't make drive.");
+			return false;
 		}
 		return true;
 	}
@@ -43,7 +41,6 @@ public class mySystem {
 		String animal;
 		for(int i=0;i<size;i++){
 			System.out.println("Enter the details of the "+(i+1)+" vehicle:");
-			//(int ID, Color color, int numberOfWheels, float KM)
 			System.out.println("Enter the ID of the vehicle:");
 			ID = sc.nextInt();
 			System.out.println("Enter the color of the vehicle (RED,GREEN,WHITE,GRAY):");
@@ -107,64 +104,12 @@ public class mySystem {
 					break;
 				default:
 					System.out.println("Wrong input, please try again.");
-					i--;
-					continue;
 				}
 				break;
 			default:
 				break;
 			}
-//			if(motor.equals("Y") || motor.equals("y")){
-//				System.out.println("Choose the vehicle:");
-//				System.out.println("1.Car.");
-//				System.out.println("Input - ");
-//				int choosing = sc.nextInt();
-//				switch(choosing){
-//				case 1:
-//					System.out.println("Enter the current fuel of the car:");
-//					fuel = sc.nextInt();
-//					System.out.println("Enter the minimum age that needs to be for a drive on this car:");
-//					minimumAge = sc.nextInt();
-//					System.out.println("Enter the number of passegers that can be in this car:");
-//					numberOfPassagers = sc.nextInt();
-//					System.out.println("Enter 1 if the car is using benzine engine and 2 if the car is using solar engine:");
-//					typeOfEngine = sc.nextInt();
-//					if(typeOfEngine == 1)
-//						vehicles[i] = new Car(ID,color,KM,new benzineEngine(1),fuel,minimumAge,numberOfPassagers);
-//					else
-//						vehicles[i] = new Car(ID,color,KM,new solarEngine(1),fuel,minimumAge,numberOfPassagers);
-//					break;
-//				default:
-//					System.out.println("Wrong input, please try again.");
-//					i--;
-//					continue;
-//				}
-//			}
-//			else{
-//				System.out.println("Choose the engine option:");
-//				System.out.println("1.Carriage.\n2.Bike.");
-//				System.out.println("Input - ");
-//				int choosing = sc.nextInt();
-//				switch(choosing){
-//				case 1:
-//					System.out.println("Enter the animal of the carriage:");
-//					animal = sc.next();
-//					vehicles[i] = new Carriage(ID,color,KM,animal);
-//					break;
-//				case 2:
-//					System.out.println("Enter the current number of the wheels of the bike:");
-//					numberOfWheels = sc.nextInt();
-//					System.out.println("Enter the current number of the gears of the bike:");
-//					numberOfGears = sc.nextInt();
-//					vehicles[i] = new Bike(ID,color,numberOfWheels,KM,numberOfGears);
-//					break;
-//				default:
-//					System.out.println("Wrong input, please try again.");
-//					i--;
-//					continue;
-//				}
-//			}
-			
+			IDtoVehicle.put(vehicles[i].getID(), vehicles[i]);
 		}
 	}
 	public static boolean validationPoint(Point point){
@@ -193,14 +138,17 @@ public class mySystem {
 			return true;
 		return false;
 	}
+	public static void printVehicles(){
+		for(int i=0;i<size;i++){
+			System.out.println((i+1)+" -> "+vehicles[i]);
+		}
+	}
 	public static void main(String []args){
 		zoneCreated = setZonePoints();
 		buildVehicles();
 		int choose = 0;
 		while(choose != -1){
-			for(int i=0;i<size;i++){
-				System.out.println((i+1)+" -> "+vehicles[i]);
-			}
+			printVehicles();
 			System.out.println("Choose from the vehicles with which one you want to work:");
 			choose = sc.nextInt();
 			choose--;
@@ -213,7 +161,10 @@ public class mySystem {
 			float x = sc.nextFloat();
 			System.out.println("Enter the y parameter:");
 			float y = sc.nextFloat();
-			System.out.println(drive(vehicles[choose].getID(),new Point(x,y)));
+			drive(vehicles[choose].getID(),new Point(x,y));
+			System.out.println(vehicles[choose]);
+			System.out.println("(*) For exit the system -> enter -1.");
 		}
+		System.exit(0);
 	}
 }
