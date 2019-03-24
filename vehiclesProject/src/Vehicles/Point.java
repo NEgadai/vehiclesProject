@@ -20,4 +20,9 @@ public class Point {
 	public float getY(){return this.y;}
 @Override
 	public String toString(){return "("+this.x+","+this.y+")";}
+	public boolean isEquals(Point p){
+		if(this.getX() == p.getX() && this.getY() == p.getY())
+			return true;
+		return false;
+	}
 }
