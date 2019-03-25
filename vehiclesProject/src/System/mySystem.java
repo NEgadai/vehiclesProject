@@ -35,7 +35,7 @@ public class mySystem {
 		System.out.println("Enter the size of the array:");
 		size = sc.nextInt();
 		vehicles = new Vehicle[size];
-		int ID, fuel, minimumAge, numberOfPassagers, typeOfEngine, numberOfWheels, numberOfGears;
+		int ID, minimumAge, numberOfPassagers, typeOfEngine, numberOfWheels, numberOfGears;
 		Color color;
 		float KM;
 		String animal;
@@ -65,8 +65,6 @@ public class mySystem {
 				int choosing = sc.nextInt();
 				switch(choosing){
 				case 1:
-					System.out.println("Enter the current fuel of the car:");
-					fuel = sc.nextInt();
 					System.out.println("Enter the minimum age that needs to be for a drive on this car:");
 					minimumAge = sc.nextInt();
 					System.out.println("Enter the number of passegers that can be in this car:");
@@ -74,9 +72,9 @@ public class mySystem {
 					System.out.println("Enter 1 if the car is using benzine engine and 2 if the car is using solar engine:");
 					typeOfEngine = sc.nextInt();
 					if(typeOfEngine == 1)
-						vehicles[i] = new Car(ID,color,KM,new benzineEngine(1),fuel,minimumAge,numberOfPassagers);
+						vehicles[i] = new Car(ID,color,KM,new benzineEngine(40),minimumAge,numberOfPassagers);
 					else
-						vehicles[i] = new Car(ID,color,KM,new solarEngine(1),fuel,minimumAge,numberOfPassagers);
+						vehicles[i] = new Car(ID,color,KM,new solarEngine(40),minimumAge,numberOfPassagers);
 					break;
 				default:
 					System.out.println("Wrong input, please try again.");

@@ -11,5 +11,4 @@ public class Bike extends Vehicle {
 	public String toString(){
 		return this.getClass().getSimpleName()+super.toString()+", number of gears:"+this.numberOfGears+"]";
 	}
-	
 }

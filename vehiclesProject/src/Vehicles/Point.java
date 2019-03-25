@@ -25,4 +25,7 @@ public class Point {
 			return true;
 		return false;
 	}
+	public float getDistance(Point p){
+		return (float)Math.sqrt((float)Math.pow((this.getX()-p.getX()),2)+(float)Math.pow((this.getY() - p.getY()),2));
+	}
 }

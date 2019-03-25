@@ -9,7 +9,7 @@ public abstract class Engine {
 	}
 	@Override
 	public String toString(){
-		return "";
+		return "[Type:"+this.getClass().getSimpleName()+", Fuel Consumption:"+this.fuelConsumption+", Fuel Tank Capacity:"+this.fuelTankCapacity+"]";
 	}
 	public int getFuelTankCapacity(){return this.fuelTankCapacity;}
 	public int getFuelConsumption(){return this.fuelConsumption;}

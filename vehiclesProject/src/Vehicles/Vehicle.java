@@ -23,11 +23,13 @@ public abstract class Vehicle {
 		this.lights = false;
 		this.curLocation = new Location();
 	}
+	public Location getCurLocation(){return this.curLocation;}
 	public boolean drive(Point p){
+		System.out.println("Vehicle drive");
 		if(p == null)
 			return false;
-		KM += 1000*(float)Math.sqrt((float)Math.pow((curLocation.getPoint().getX()-p.getX()),2)+(float)Math.pow((curLocation.getPoint().getY() - p.getY()),2));
-		curLocation.setPoint(p);
+		this.KM += getCurLocation().getPoint().getDistance(p);
+		getCurLocation().setPoint(p);
 		return true;
 	}
 	@Override
