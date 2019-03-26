@@ -16,7 +16,6 @@ public abstract class Vehicle {
 			this.ID = getRandomNumberID();
 			System.out.println("The ID number which you entered for this vehicle is not valid.\nThe car was get a random id and the ID is: "+this.ID+"\n");
 		}
-//		this.ID = ID;
 		this.color = color;
 		this.numberOfWheels = numberOfWheels;
 		this.KM = KM;
