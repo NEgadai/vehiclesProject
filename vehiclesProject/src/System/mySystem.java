@@ -12,7 +12,11 @@ import Vehicles.Point;
 import Vehicles.Vehicle;
 import Vehicles.benzineEngine;
 import Vehicles.solarEngine;
-
+/**
+ * The MySystem class.
+ *  
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public class mySystem {
 	private static Map<Integer, Vehicle> IDtoVehicle = new HashMap<Integer, Vehicle>();
 	private static int size;
@@ -31,10 +35,14 @@ public class mySystem {
 		}
 		return true;
 	}
+	/**
+	 * Build Vehicles.
+	 */
 	public static void buildVehicles(){
 		System.out.println("Enter the size of the array:");
 		size = sc.nextInt();
 		vehicles = new Vehicle[size];
+		//variables
 		int ID, minimumAge, numberOfPassagers, typeOfEngine, numberOfWheels, numberOfGears;
 		Color color;
 		float KM;
@@ -110,6 +118,14 @@ public class mySystem {
 			IDtoVehicle.put(vehicles[i].getID(), vehicles[i]);
 		}
 	}
+	/**
+	 * Checks that the points are in the polygon.
+	 * parameter boolean parameter true/false.
+	 * 
+	 * @param point
+	 * 		  A Point object.
+	 * @return result
+	 */
 	public static boolean validationPoint(Point point){
 		if(zoneCreated == false)
 			return false;
@@ -121,6 +137,11 @@ public class mySystem {
 	      }
 	    return result;
 	}
+	/**
+	 * Create the polygon that the vehicles can drive there, And check if all points are different.
+	 * 
+	 * @return true, else false.
+	 */
 	public static boolean setZonePoints(){
 		float x = 0,y = 0;
 		System.out.println("Enter 4 points for create the polygon that the vehicles can drive there:");
@@ -136,11 +157,19 @@ public class mySystem {
 			return true;
 		return false;
 	}
+	/**
+	 * A class print all information on vehicles.
+	 */
 	public static void printVehicles(){
 		for(int i=0;i<size;i++){
 			System.out.println((i+1)+" -> "+vehicles[i]);
 		}
 	}
+	/**
+	 * The main.
+	 * @param args
+	 * 		  The arguments.
+	 */
 	public static void main(String []args){
 		zoneCreated = setZonePoints();
 		buildVehicles();
