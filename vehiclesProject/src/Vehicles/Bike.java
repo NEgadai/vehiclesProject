@@ -1,4 +1,7 @@
 package Vehicles;
+
+import java.awt.Graphics;
+
 /**
  * A class inherits from Vehicle, and represents a Bike.
  * 
@@ -36,5 +39,40 @@ public class Bike extends Vehicle {
 	@Override
 	public String toString(){
 		return this.getClass().getSimpleName()+super.toString()+", number of gears:"+this.numberOfGears+"]";
+	}
+	@Override
+	public String getVehicleName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getFuelConsumption() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public boolean move(Point p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void loadImages(String nm) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void drawObject(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

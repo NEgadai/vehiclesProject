@@ -5,7 +5,7 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public class solarEngine extends Engine {
-	private static final int FUEL_CONSUMPTION = 6;
+	private static final int FUEL_CONSUMPTION = 1;
 	/**
 	 * A Class Constructor.
 	 * 

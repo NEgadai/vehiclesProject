@@ -4,7 +4,7 @@ package Vehicles;
  * 
  * @author Tony Schneider,Daniel Sukharev
  */
-public enum Direction {
+public enum Orientation {
 	NORTH, 
 	SOUTH, 
 	EAST, 

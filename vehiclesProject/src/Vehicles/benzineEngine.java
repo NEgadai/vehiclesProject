@@ -5,7 +5,7 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public class benzineEngine extends Engine {
-	private static final int FUEL_CONSUMPTION = 9;
+	private static final int FUEL_CONSUMPTION = 2;
 	/**
 	 * A Class Constructor.
 	 * 

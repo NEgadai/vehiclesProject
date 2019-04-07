@@ -6,7 +6,7 @@ package Vehicles;
  */
 public class Location {
 	private Point p;
-	private Direction dire;
+	private Orientation dire;
 	/**
 	 * A Class Constructor.
 	 */
@@ -21,7 +21,7 @@ public class Location {
 	 * @param dire
 	 * 		  A Direction.
 	 */
-	public Location(Point p, Direction dire){
+	public Location(Point p, Orientation dire){
 		this.p = p;
 		this.dire = dire;
 	}
@@ -32,7 +32,7 @@ public class Location {
 	 * 		  A Direction.
 	 * @return true.
 	 */
-	public boolean setDirection(Direction dire){
+	public boolean setDirection(Orientation dire){
 		this.dire = dire;
 		return true;
 		}
@@ -58,7 +58,7 @@ public class Location {
 	 * 
 	 * @return Direction.
 	 */
-	public Direction getDirection(){return this.dire;}
+	public Orientation getDirection(){return this.dire;}
 	/**
 	 * Creates a string representation.
 	 * 
