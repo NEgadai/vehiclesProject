@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 public class CityFrame extends JFrame implements ActionListener {
+	
 	private static CityFrame frame = null; 
 	private static Dimension frameSize;
 	private JMenuBar menuBar;
@@ -74,11 +75,26 @@ public class CityFrame extends JFrame implements ActionListener {
 	}
 	public static Dimension getFrameSize(){return frameSize;}
 	public static void addVehicleDialogs(){
-		Object[] typeOfVehicles = {"Carriage","Bike","Solar Engine Car","Benzine Engine Car"};
-		Object[] colors = {"Red","Green","White","Gray"};
-		int firstDialog = JOptionPane.showOptionDialog(frame,
-				"Which vehicle would you like to add?","Type of Vehicle",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,typeOfVehicles,typeOfVehicles[3]);
-		int secondDialog = JOptionPane.showOptionDialog(frame,
-				"What is the color of that vehicle?","Color Options",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,colors,colors[3]);
+		AddVehicleDialog avd = new  AddVehicleDialog();
+		avd.setVisible(true);
+//		Object[] typeOfVehicles = {"Carriage","Bike","Solar Engine Car","Benzine Engine Car"};
+//		Object[] colors = {"RED","GREEN","WHITE","GRAY"};
+//		int vehicleDialog = JOptionPane.showOptionDialog(frame,
+//				"Which vehicle would you like to add?","Type of Vehicle",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,typeOfVehicles,typeOfVehicles[3]);
+//		int colorDialog = JOptionPane.showOptionDialog(frame,
+//				"What is the color of that vehicle?","Color Options",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,colors,colors[3]);
+//		switch(vehicleDialog){
+//		case 0:
+//			
+//			break;
+//		case 1:
+//			break;
+//		case 2:
+//			break;
+//		case 3:
+//			break;
+//		default:
+//			break;
+//		}
 	}
 }
