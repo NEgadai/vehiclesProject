@@ -31,7 +31,6 @@ public class CityFrame extends JFrame implements ActionListener {
     { 
         if (frame == null) 
         	frame = new CityFrame("City"); 
-  
         return frame; 
     } 
 	private void setMenu(){
