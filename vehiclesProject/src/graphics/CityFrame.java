@@ -15,7 +15,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 public class CityFrame extends JFrame implements ActionListener {
-	
 	private static CityFrame frame = null; 
 	private static Dimension frameSize;
 	private JMenuBar menuBar;
@@ -23,9 +22,19 @@ public class CityFrame extends JFrame implements ActionListener {
 	private JMenu fileMenu, helpMenu;
 	private CityFrame(String str){
 		super(str);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();//get the screen size.
 		setMenu();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout(0,0));//set border layout for set 2 panels - one for the city background and one for the below buttons
+		final CityPanel backgroundPanel = new CityPanel();
+		frameSize = new Dimension((int)backgroundPanel.getBackgroundSize().getWidth(),(int)backgroundPanel.getBackgroundSize().getHeight());
+		final ButtonsPanel buttonsPanel = new ButtonsPanel();
+		add(backgroundPanel);
+		add(buttonsPanel,BorderLayout.SOUTH);//stick the panel of the buttons in the SOUTH location.  
+		setPreferredSize(new Dimension(frameSize.width,(int)(frameSize.height+buttonsPanel.getSize().getHeight())));//set size of the frame as the size of the background
+//		setPreferredSize(new Dimension(800,600));//set size of the frame as the size of the background
+		setLocation(screenSize.width/2-getPreferredSize().width/2, screenSize.height/2-getPreferredSize().height/2);//set the frame in the middle of the screen
+		pack(); 
 	}
 	public static CityFrame getInstance() //Singelton - Design Pattern
     { 
@@ -57,43 +66,8 @@ public class CityFrame extends JFrame implements ActionListener {
 	}
 	//Static methods:
 	public static void main(String []args){
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();//get the screen size.
-		
 		CityFrame frame = CityFrame.getInstance();
-		
-		final CityPanel backgroundPanel = new CityPanel();
-		frameSize = new Dimension((int)backgroundPanel.getBackgroundSize().getWidth(),(int)backgroundPanel.getBackgroundSize().getHeight());
-		final ButtonsPanel buttonsPanel = new ButtonsPanel();
-		frame.add(backgroundPanel);
-		frame.add(buttonsPanel,BorderLayout.SOUTH);//stick the panel of the buttons in the SOUTH location.  
-		frame.setPreferredSize(new Dimension(frameSize.width,(int)(frameSize.height+buttonsPanel.getSize().getHeight())));//set size of the frame as the size of the background
-		frame.setLocation(screenSize.width/2-frame.getPreferredSize().width/2, screenSize.height/2-frame.getPreferredSize().height/2);//set the frame in the middle of the screen
-		
-		frame.pack(); 
 		frame.setVisible(true); 
 	}
 	public static Dimension getFrameSize(){return frameSize;}
-	public static void addVehicleDialogs(){
-		AddVehicleDialog avd = new  AddVehicleDialog();
-		avd.setVisible(true);
-//		Object[] typeOfVehicles = {"Carriage","Bike","Solar Engine Car","Benzine Engine Car"};
-//		Object[] colors = {"RED","GREEN","WHITE","GRAY"};
-//		int vehicleDialog = JOptionPane.showOptionDialog(frame,
-//				"Which vehicle would you like to add?","Type of Vehicle",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,typeOfVehicles,typeOfVehicles[3]);
-//		int colorDialog = JOptionPane.showOptionDialog(frame,
-//				"What is the color of that vehicle?","Color Options",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,colors,colors[3]);
-//		switch(vehicleDialog){
-//		case 0:
-//			
-//			break;
-//		case 1:
-//			break;
-//		case 2:
-//			break;
-//		case 3:
-//			break;
-//		default:
-//			break;
-//		}
-	}
 }

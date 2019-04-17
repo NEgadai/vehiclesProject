@@ -45,7 +45,8 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == addVehibleButton){
-			CityFrame.addVehicleDialogs();
+			AddVehicleDialog avd = new  AddVehicleDialog();
+			avd.setVisible(true);
 		}
 		else if(e.getSource() == clearButton){
 			
