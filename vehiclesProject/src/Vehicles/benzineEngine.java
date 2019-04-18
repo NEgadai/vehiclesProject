@@ -5,15 +5,11 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public class benzineEngine extends Engine {
-	private static final int FUEL_CONSUMPTION = 2;
-	/**
-	 * A Class Constructor.
-	 * 
-	 * @param fuelTankCapacity
-	 * 		  The fuel capacity.
-	 */
 	public benzineEngine(int fuelTankCapacity){
-		super(FUEL_CONSUMPTION,fuelTankCapacity);
+		super(fuelTankCapacity);
 		
+	}
+	public Object clone() throws CloneNotSupportedException {
+	    return super.clone();
 	}
 }

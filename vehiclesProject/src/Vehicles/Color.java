@@ -5,8 +5,8 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public enum Color {
-	RED,
-	GREEN,
-	WHITE,
-	GRAY;
+	Red,
+	Green,
+	Silver,
+	White;
 }

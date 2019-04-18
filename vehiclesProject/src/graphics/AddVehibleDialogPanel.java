@@ -16,6 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 
+import Vehicles.Bike;
+import Vehicles.Car;
+import Vehicles.Carriage;
+import Vehicles.Color;
+import Vehicles.Vehicle;
+import Vehicles.benzineEngine;
+import Vehicles.solarEngine;
+
 public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 	private JPanel topPanel,buttomPanel,centerPanel,buttonsPanel,vehicleType,vehicleColor;
 	private final JRadioButton[] typeButtons = new JRadioButton[4],colorButtons = new JRadioButton[4];
@@ -25,7 +33,9 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 	private JSlider gears;
 	private final GridBagConstraints c = new GridBagConstraints();
 	private final int FPS_MIN = 0, FPS_MAX = 10, FPS_INIT = 5;
-	public AddVehibleDialogPanel(){
+	private CityPanel city;
+	public AddVehibleDialogPanel(CityPanel city){
+		this.city = city;
 		setLayout(new BorderLayout());
 		
 		topPanel = new JPanel(new GridLayout());
@@ -39,6 +49,7 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 		
 		for(int i=0;i<4;i++){
 			typeButtons[i] = new JRadioButton(typeTexts[i]);
+			typeButtons[i].setActionCommand(typeTexts[i]);
 			if(i == 0)
 				typeButtons[i].setSelected(true);
 			typeButtons[i].addActionListener(this);
@@ -53,6 +64,7 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 		}
 		for(int i=0;i<4;i++){
 			colorButtons[i] = new JRadioButton(colorTexts[i]);
+			colorButtons[i].setActionCommand(colorTexts[i]);
 			if(i == 0)
 				colorButtons[i].setSelected(true);
 			colorButtons[i].addActionListener(this);
@@ -95,7 +107,9 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 		buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridLayout(1,2));
 		Submit = new JButton("OK");
+		Submit.addActionListener(this);
 		Cancel = new JButton("Cancel");
+		Cancel.addActionListener(this);
 		c.gridy = 1;
 		buttonsPanel.add(Submit);
 		buttonsPanel.add(Cancel);
@@ -107,9 +121,31 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == Submit){
+			Vehicle vehicle = null;
+//			city = new CityPanel();
+			String colorSelection = vcGroup.getSelection().getActionCommand();
 			
+			String typeSelection = vtGroup.getSelection().getActionCommand();
+			switch(typeSelection){
+			case "Benzine Car":
+				System.out.println("benzine work");
+				vehicle = new Car(Color.valueOf(colorSelection),new benzineEngine(40),city);
+				break;
+			case "Solar Car":
+				System.out.println("solar work");
+				vehicle = new Car(Color.valueOf(colorSelection),new solarEngine(40),city);
+				break;
+			case "Bike":
+				vehicle = new Bike(Color.valueOf(colorSelection),gears.getValue(),city);
+				break;
+			case "Carriage":
+				vehicle = new Carriage(Color.valueOf(colorSelection),city);
+				break;
+			}
+			city.setVehicle(vehicle);
+			ButtonsPanel.unVisible();
 		}else if(e.getSource() == Cancel){
-			setVisible(false);
+			ButtonsPanel.unVisible();
 		}else if(e.getSource() == typeButtons[2]){
 			centerPanel.setVisible(true);
 		}else

@@ -5,12 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ButtonsPanel extends JPanel implements ActionListener {
 	private JButton addVehibleButton,clearButton,fuelFoodButton,lightsButton,infoButton,exitButton;
-	public ButtonsPanel(){
-		super();
+	private static AddVehicleDialog avd;
+	private CityPanel city;
+	public ButtonsPanel(CityPanel city){
+		this.city = city;
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();//for configure the buttons
 	    c.fill = GridBagConstraints.BOTH;//Fill all size space of the frame
@@ -45,8 +48,12 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == addVehibleButton){
-			AddVehicleDialog avd = new  AddVehicleDialog();
-			avd.setVisible(true);
+			if(CityPanel.thereVehicle())//Check if CityPanel exists current vehicle.
+				JOptionPane.showMessageDialog(null, "Error,There is already a vehicle.");
+			else{
+				avd = new  AddVehicleDialog(city);
+				avd.setVisible(true);
+			}
 		}
 		else if(e.getSource() == clearButton){
 			
@@ -60,4 +67,5 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 			System.exit(0);
 		}
 	}
+	public static void unVisible(){avd.setVisible(false);}
 }

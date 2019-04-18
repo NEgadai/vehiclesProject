@@ -5,85 +5,34 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public class Point {
-	private float x;
-	private float y;
-	/**
-	 * A Class Constructor.
-	 */
-
+	private int x;
+	private int y;
 	public Point(){this.x = this.y = 0;}
-	/**
-	 * A Class Constructor.
-	 * 
-	 * @param x
-	 * 		  x axis value.
-	 * @param y
-	 * 		  y axis value.
-	 */
-	public Point(float x,float y){
+	public Point(int x,int y){
 		this.x = x;
 		this.y = y;
 	}
-	/**
-	 * Set x axis value.
-	 * 
-	 * @param x
-	 * 		  x axis value.
-	 * @return true.
-	 */
-	public boolean setX(float x){
+	public boolean setX(int x){
 		this.x = x;
 		return true;
 	}
-	/**
-	 * Set y axis value.
-	 * 
-	 * @param y
-	 * 		  y axis value.
-	 * @return true.
-	 */
-	public boolean setY(float y){
+	public boolean setY(int y){
 		this.y = y;
 		return true;
 	}
-	/**
-	 * Get x axis value.
-	 * 
-	 * @return x axis.
-	 */
-	public float getX(){return this.x;}
-	/**
-	 * Get y axis value.
-	 * 
-	 * @return y axis.
-	 */
-	public float getY(){return this.y;}
-	/**
-	 * Creates a string representation.
-	 * 
-	 * @return A string representation.
-	 */
+	public int getX(){return this.x;}
+	public int getY(){return this.y;}
 	@Override
 	public String toString(){return "("+this.x+","+this.y+")";}
-	/**
-	 * Check if is equal.
-	 * 
-	 * @param p
-	 * 		  A Point object.
-	 * @return true, else false.
-	 */
 	public boolean isEquals(Point p){
 		if(this.getX() == p.getX() && this.getY() == p.getY())
 			return true;
 		return false;
 	}
-	/**
-	 * Get Distanse.
-	 * @param p
-	 * 		  A Point object.
-	 * @return Distanse.
-	 */
-	public float getDistance(Point p){
-		return (float)Math.sqrt((float)Math.pow((this.getX()-p.getX()),2)+(float)Math.pow((this.getY() - p.getY()),2));
+	public int getDistance(Point p){
+		return (int)Math.sqrt((int)Math.pow((this.getX()-p.getX()),2)+(int)Math.pow((this.getY() - p.getY()),2));
+	}
+	public Object clone() throws CloneNotSupportedException {
+	    return super.clone();
 	}
 }

@@ -5,15 +5,10 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public class solarEngine extends Engine {
-	private static final int FUEL_CONSUMPTION = 1;
-	/**
-	 * A Class Constructor.
-	 * 
-	 * @param fuelTankCapacity
-	 * 		  The fuel capacity.
-	 */
 	public solarEngine(int fuelTankCapacity){
-		super(FUEL_CONSUMPTION,fuelTankCapacity);
+		super(fuelTankCapacity);
 	}
-
+	public Object clone() throws CloneNotSupportedException {
+	    return super.clone();
+	}
 }

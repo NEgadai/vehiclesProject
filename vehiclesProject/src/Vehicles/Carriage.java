@@ -1,5 +1,7 @@
 package Vehicles;
 
+import graphics.CityPanel;
+
 import java.awt.Graphics;
 
 /**
@@ -10,48 +12,24 @@ import java.awt.Graphics;
 public class Carriage extends Vehicle {
 	private PackAnimal packAnimal = null;
 	private static final int NUMBER_OF_WHEELS = 4;
-	private static int speed = 1;
-	public Carriage(int ID, Color color, float KM, String animal){
-		super(ID,color,NUMBER_OF_WHEELS,KM);
-		this.packAnimal = packAnimal;
+	private static int Speed = 1;
+	private static final int numberOfPassengers = 2;
+	public Carriage(Color color,CityPanel pan){
+		super(color,NUMBER_OF_WHEELS,pan);
 	}
 	@Override
 	public String toString(){
 		return this.getClass().getSimpleName()+super.toString()+", animal:"+this.packAnimal+"]";
 	}
 	@Override
-	public String getVehicleName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String getVehicleName() {return this.getClass().getSimpleName();}
 	@Override
-	public int getSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int getSpeed() {return Speed;}
 	@Override
-	public int getFuelConsumption() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public String getSimpleVehicleName() {return this.getClass().getSimpleName();}
 	@Override
-	public boolean move(Point p) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public void loadImages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void drawObject(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean moveable() {return true;}
+	public Object clone() throws CloneNotSupportedException {
+	    return super.clone();
 	}
 }

@@ -5,8 +5,8 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public enum Orientation {
-	NORTH, 
-	SOUTH, 
-	EAST, 
-	WEST; 
+	North, 
+	South, 
+	East, 
+	West; 
 }

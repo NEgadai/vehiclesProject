@@ -6,64 +6,31 @@ package Vehicles;
  */
 public class Location {
 	private Point p;
-	private Orientation dire;
-	/**
-	 * A Class Constructor.
-	 */
+	private Orientation ori;
 	public Location(){
 		p = new Point();
+		ori = Orientation.East;
 	}
-	/**
-	 * A Class Constructor.
-	 * 
-	 * @param p
-	 * 		  A Point object.
-	 * @param dire
-	 * 		  A Direction.
-	 */
-	public Location(Point p, Orientation dire){
+
+	public Location(Point p, Orientation ori){
 		this.p = p;
-		this.dire = dire;
+		this.ori = ori;
 	}
-	/**
-	 * Set Direction.
-	 * 
-	 * @param dire
-	 * 		  A Direction.
-	 * @return true.
-	 */
-	public boolean setDirection(Orientation dire){
-		this.dire = dire;
+
+	public boolean setOrientation(Orientation ori){
+		this.ori = ori;
 		return true;
 		}
-	/**
-	 * Set Location.
-	 * 
-	 * @param p
-	 * 		  A Point object.
-	 * @return true.
-	 */
 	public boolean setPoint(Point p){
 		this.p = p;
 		return true;
 	}
-	/**
-	 * Get Location.
-	 * 
-	 * @return Location.
-	 */
 	public Point getPoint(){return this.p;}
-	/**
-	 * Get Direction.
-	 * 
-	 * @return Direction.
-	 */
-	public Orientation getDirection(){return this.dire;}
-	/**
-	 * Creates a string representation.
-	 * 
-	 * @return A string representation.
-	 */
+	public Orientation getOrientation(){return this.ori;}
 	@Override
-	public String toString(){return "[Point:"+this.p+", Direction:"+this.dire+"]";}
+	public String toString(){return "[Point:"+this.p+", Direction:"+this.ori+"]";}
+//	public void addX(){this.p.setX(this.p.getX()+1);}
+//	public void addY(){this.p.setY(this.p.getY()+1);}
+//	public void subX(){this.p.setX(this.p.getX()-1);}
+//	public void subY(){this.p.setY(this.p.getY()-1);}
 }

@@ -28,12 +28,13 @@ public class CityFrame extends JFrame implements ActionListener {
 		setLayout(new BorderLayout(0,0));//set border layout for set 2 panels - one for the city background and one for the below buttons
 		final CityPanel backgroundPanel = new CityPanel();
 		frameSize = new Dimension((int)backgroundPanel.getBackgroundSize().getWidth(),(int)backgroundPanel.getBackgroundSize().getHeight());
-		final ButtonsPanel buttonsPanel = new ButtonsPanel();
+		final ButtonsPanel buttonsPanel = new ButtonsPanel(backgroundPanel);
 		add(backgroundPanel);
 		add(buttonsPanel,BorderLayout.SOUTH);//stick the panel of the buttons in the SOUTH location.  
 		setPreferredSize(new Dimension(frameSize.width,(int)(frameSize.height+buttonsPanel.getSize().getHeight())));//set size of the frame as the size of the background
 //		setPreferredSize(new Dimension(800,600));//set size of the frame as the size of the background
 		setLocation(screenSize.width/2-getPreferredSize().width/2, screenSize.height/2-getPreferredSize().height/2);//set the frame in the middle of the screen
+		setResizable(false);
 		pack(); 
 	}
 	public static CityFrame getInstance() //Singelton - Design Pattern
