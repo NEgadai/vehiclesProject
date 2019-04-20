@@ -34,29 +34,37 @@ public class CityPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);//Call the default method due to overriding.
         setPreferredSize(backgroundSize);
-        Dimension size = getSize();//get the size of this panel and set it into Dimension(size) object.
-        g.drawImage(background, 0, 0,size.width, size.height,0, 0, background.getWidth(), background.getHeight(), this);//set the background in 0,0 location (drawing the background)
+        g.drawImage(background, 0, 0,getSize().width, getSize().height,0, 0, background.getWidth(), background.getHeight(), this);//set the background in 0,0 location (drawing the background)
         if(thereVehicle()){
+        	int Speed = currentVehicle.getSpeed();
+        	int size = 65-65%Speed;
+        	int endX = (int)backgroundSize.getWidth()-size*3, endY = (int)backgroundSize.getHeight()-size*4,middleY = (int)backgroundSize.getHeight()/2-size*2;
+        	endX = endX-endX%Speed;
+        	endY = endY-endY%Speed;
+        	middleY = middleY-middleY%Speed;
         	Random rand = new Random();
-        	boolean bool = rand.nextBoolean();
-        	if(currentVehicle.getCurLocation().getPoint().getX() == 920 && currentVehicle.getCurLocation().getOrientation() == Orientation.East){
+        	if(currentVehicle.getCurLocation().getPoint().getX() == endX && currentVehicle.getCurLocation().getOrientation() == Orientation.East){
         		currentVehicle.getCurLocation().setOrientation(Orientation.South);
-        		currentVehicle.getCurLocation().getPoint().setX(986+66);
-        		currentVehicle.getCurLocation().getPoint().setY(70);
-        	}else if(currentVehicle.getCurLocation().getPoint().getY() == 202 && currentVehicle.getCurLocation().getOrientation() == Orientation.South){
-        		if(bool){
+        		currentVehicle.getCurLocation().setPoint(new Point((int)(endX+size*1.5),currentVehicle.getCurLocation().getPoint().getY()+size));
+        	}else if(currentVehicle.getCurLocation().getPoint().getY() == middleY && currentVehicle.getCurLocation().getOrientation() == Orientation.South){
+        		if(rand.nextBoolean()){
         			currentVehicle.getCurLocation().setOrientation(Orientation.West);
-        			currentVehicle.getCurLocation().getPoint().setX(920);
-        			currentVehicle.getCurLocation().getPoint().setY(280);
+        			currentVehicle.getCurLocation().setPoint(new Point(endX,middleY+size));
         		}
-        	}else if(currentVehicle.getCurLocation().getPoint().getY() == 562 && currentVehicle.getCurLocation().getOrientation() == Orientation.South){
+        	}else if(currentVehicle.getCurLocation().getPoint().getY() == endY && currentVehicle.getCurLocation().getOrientation() == Orientation.South){
         		currentVehicle.getCurLocation().setOrientation(Orientation.West);
-        		currentVehicle.getCurLocation().getPoint().setX(920);
-    			currentVehicle.getCurLocation().getPoint().setY(630);
-        	}else if(currentVehicle.getCurLocation().getPoint().getX() == 0 && currentVehicle.getCurLocation().getOrientation() == Orientation.West){
+        		currentVehicle.getCurLocation().setPoint(new Point(endX,(int)(endY+size*1.5)));
+        	}else if(currentVehicle.getCurLocation().getPoint().getX() == size && currentVehicle.getCurLocation().getOrientation() == Orientation.West){
         		currentVehicle.getCurLocation().setOrientation(Orientation.North);
-        	}else if(currentVehicle.getCurLocation().getPoint().getY() == 0 && currentVehicle.getCurLocation().getOrientation() == Orientation.North){
+        		currentVehicle.getCurLocation().setPoint(new Point(0,currentVehicle.getCurLocation().getPoint().getY()-size));
+        	}else if(currentVehicle.getCurLocation().getPoint().getY() == middleY+size && currentVehicle.getCurLocation().getOrientation() == Orientation.North){
+        		if(rand.nextBoolean()){
+        			currentVehicle.getCurLocation().setOrientation(Orientation.East);
+            		currentVehicle.getCurLocation().setPoint(new Point(size,middleY+size));
+        		}
+        	}else if(currentVehicle.getCurLocation().getPoint().getY() == size && currentVehicle.getCurLocation().getOrientation() == Orientation.North){
         		currentVehicle.getCurLocation().setOrientation(Orientation.East);
+        		currentVehicle.getCurLocation().setPoint(new Point(size,0));
         	}
         	currentVehicle.drawObject(g);
         	currentVehicle.move(currentVehicle.nextLocation());
