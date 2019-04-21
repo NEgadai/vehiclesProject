@@ -78,4 +78,10 @@ public class CityPanel extends JPanel {
 		vehicleExists = true;
 		repaint();
 	}
+	public Vehicle getVehicle(){return currentVehicle;}
+	public void removeVehicle(){
+		currentVehicle = null;
+		vehicleExists = false;
+		repaint();
+	}
 }

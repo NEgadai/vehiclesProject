@@ -20,11 +20,11 @@ public abstract class hasEngine extends Vehicle {
 		Refuel();
 	}
 	public boolean Refuel(){
-		System.out.println("refuel");
 		if (this.engine.getFuelTankCapacity() == this.fuel)
 			return false;
 		else{
-			fuel = this.engine.getFuelTankCapacity();
+			setFuel(this.engine.getFuelTankCapacity());
+			this.fuelConsumption += this.engine.getFuelTankCapacity();
 			return true;
 		}
 	}

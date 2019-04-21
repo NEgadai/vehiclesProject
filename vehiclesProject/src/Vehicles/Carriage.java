@@ -32,4 +32,12 @@ public class Carriage extends Vehicle {
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
 	}
+	@Override
+	public float getFuel() {
+		return 0;
+	}
+	@Override
+	public boolean Refuel() {
+		return true;
+	}
 }

@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  * 
  * @author Tony Schneider,Daniel Sukharev
  */
-public abstract class Vehicle implements IMoveable, IDrawable, Cloneable{
+public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicle{
 	private static final int MIN_AGE = 18;
 	private static final int MIN_ID = 1000;
 	private static final int MAX_ID = 1000000;
@@ -30,10 +30,10 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable{
 	protected CityPanel pan;
 	protected BufferedImage[] images = new BufferedImage[4];
 //	protected BufferedImage img1 = null, img2 = null, img3 = null, img4 = null;
-	protected float KM;
+	protected float Distance;
 	public Vehicle(Color color,int numberOfWheels,CityPanel pan){
 		setID(count++);
-		this.KM = 0;
+		this.Distance = 0;
 		this.col = color;
 		this.wheels = numberOfWheels;
 		this.lights = false;
@@ -46,12 +46,12 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable{
 	public boolean drive(Point p){
 		if(p == null)
 			return false;
-		this.KM += getCurLocation().getPoint().getDistance(p);
+		this.Distance += getCurLocation().getPoint().getDistance(p);
 		getCurLocation().setPoint(p);
 		return true;
 	}
 	public String toString(){
-		return " "+this.id+" - [color:"+this.col+", number of wheels:"+this.wheels+", KM:"+this.KM+", current location:"+this.loc+", Fuel Consumption:"+this.fuelConsumption;
+		return " "+this.id+" - [color:"+this.col+", number of wheels:"+this.wheels+", KM:"+this.Distance+", current location:"+this.loc+", Fuel Consumption:"+this.fuelConsumption;
 	}
 	public boolean lightsOnOff(){this.lights = !this.lights; return true;}
 	public int getID(){return this.id;}
@@ -61,10 +61,13 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable{
 		this.id = ID;
 		return true;
 	}
+	public int getWheels(){return this.wheels;}
 	public String getColor() {return String.valueOf(this.col);}
-	public static int getRandomNumberID(){
-		Random rand = new Random();
-		return rand.nextInt((MAX_ID - MIN_ID) + 1) + MIN_ID;
+	public float getDistance(){return this.Distance;}
+	public String getLights(){
+		if(lights)
+			return "On";
+		return "Off";
 	}
 	public int getFuelConsumption(){return this.fuelConsumption;}
 	public void addFuelConsumption(int fuelConsumption){this.fuelConsumption = this.fuelConsumption + fuelConsumption;}

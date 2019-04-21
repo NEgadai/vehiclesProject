@@ -8,10 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Vehicles.Car;
+
 public class ButtonsPanel extends JPanel implements ActionListener {
 	private JButton addVehibleButton,clearButton,fuelFoodButton,lightsButton,infoButton,exitButton;
 	private static AddVehicleDialog avd;
 	private CityPanel city;
+	private infoFrame info;
 	public ButtonsPanel(CityPanel city){
 		this.city = city;
 		setLayout(new GridBagLayout());
@@ -56,13 +59,15 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 			}
 		}
 		else if(e.getSource() == clearButton){
-			
+			city.removeVehicle();
 		}else if(e.getSource() == fuelFoodButton){
-			
+			if(city.getVehicle() instanceof Car)
+				city.getVehicle().Refuel();
 		}else if(e.getSource() == lightsButton){
-			
+			city.getVehicle().lightsOnOff();
 		}else if(e.getSource() == infoButton){
-			
+			info =new infoFrame(city.getVehicle());
+			info.setVisible(true);
 		}else if(e.getSource() == exitButton){
 			System.exit(0);
 		}
