@@ -1,7 +1,6 @@
 package graphics;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -14,6 +13,7 @@ import javax.swing.SwingConstants;
 import Vehicles.Vehicle;
 
 public class infoPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTable j;
 	private static final String[] columnNames = { "Vehicle","ID","Color","Wheels","Speed","Fuel/Energy","Distance","Fuel/Energy consumption","Lights" }; ;
 	private static final ArrayList<String[]> listOfVehicles = new ArrayList<String[]>();

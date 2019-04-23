@@ -11,10 +11,11 @@ import javax.swing.JPanel;
 import Vehicles.Car;
 
 public class ButtonsPanel extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private JButton addVehibleButton,clearButton,fuelFoodButton,lightsButton,infoButton,exitButton;
 	private static AddVehicleDialog avd;
 	private CityPanel city;
-	private infoFrame info;
+	private infoDialog info;
 	public ButtonsPanel(CityPanel city){
 		this.city = city;
 		setLayout(new GridBagLayout());
@@ -75,7 +76,7 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 			else
 				JOptionPane.showMessageDialog(null, "No vehicles.");
 		}else if(e.getSource() == infoButton){
-			info = infoFrame.getInstance();
+			info = infoDialog.getInstance();
 			info.setVisible(true);
 		}else if(e.getSource() == exitButton){
 			System.exit(0);

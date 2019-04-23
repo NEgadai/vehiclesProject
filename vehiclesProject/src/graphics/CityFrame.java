@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 public class CityFrame extends JFrame implements ActionListener {
-	private static CityFrame frame = null; 
+	private static final long serialVersionUID = 1L;
 	private static Dimension frameSize;
 	private JMenuBar menuBar;
 	private JMenuItem exitItem,helpItem;
@@ -34,12 +34,6 @@ public class CityFrame extends JFrame implements ActionListener {
 		setResizable(false);
 		pack(); 
 	}
-	public static CityFrame getInstance() //Singelton - Design Pattern
-    { 
-        if (frame == null) 
-        	frame = new CityFrame("City"); 
-        return frame; 
-    } 
 	private void setMenu(){
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
@@ -64,7 +58,7 @@ public class CityFrame extends JFrame implements ActionListener {
 	}
 	//Static methods:
 	public static void main(String []args){
-		CityFrame frame = CityFrame.getInstance();
+		CityFrame frame = new CityFrame("City");
 		frame.setVisible(true); 
 	}
 	public static Dimension getFrameSize(){return frameSize;}

@@ -2,7 +2,6 @@ package Vehicles;
 
 import graphics.CityPanel;
 
-import java.awt.Graphics;
 
 /**
  * A class inherits from hasEngine, and represents a Car.

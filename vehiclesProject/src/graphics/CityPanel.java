@@ -15,6 +15,7 @@ import Vehicles.Point;
 import Vehicles.Vehicle;
 
 public class CityPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private Vehicle currentVehicle;
 	private BufferedImage background = loadImage();
 	private Dimension backgroundSize = new Dimension(background.getWidth(),background.getHeight());
@@ -37,8 +38,7 @@ public class CityPanel extends JPanel {
         g.drawImage(background, 0, 0,getSize().width, getSize().height,0, 0, background.getWidth(), background.getHeight(), this);//set the background in 0,0 location (drawing the background)
         if(thereVehicle()){
         	infoPanel.setVehicle(currentVehicle);
-        	int Speed = currentVehicle.getSpeed();
-        	int size = 65-65%Speed;
+        	int Speed = currentVehicle.getSpeed(), size = 65-65%Speed;
         	int endX = (int)backgroundSize.getWidth()-size*3, endY = (int)backgroundSize.getHeight()-size*4,middleY = (int)backgroundSize.getHeight()/2-size*2;
         	endX = endX-endX%Speed;
         	endY = endY-endY%Speed;

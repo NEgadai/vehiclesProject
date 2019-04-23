@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.JDialog;
 
 public class AddVehicleDialog extends JDialog {
+	private static final long serialVersionUID = 1L;
 	public AddVehicleDialog(CityPanel city){
 //		super(new JFrame(),"Add Vehicle");
 		setTitle("Add a vehicle to the city");

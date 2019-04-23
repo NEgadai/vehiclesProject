@@ -2,7 +2,6 @@ package Vehicles;
 
 import graphics.CityPanel;
 
-import java.awt.Graphics;
 
 /**
  * A class inherits from Vehicle, and represents a Bike.
@@ -12,7 +11,7 @@ import java.awt.Graphics;
 public class Bike extends Vehicle {
 	private static final int Speed = 4;
 	private int numberOfGears;
-	private static final int numberOfPassengers = 1;
+//	private static final int numberOfPassengers = 1;
 	private static final int numberOfWheels = 2;
 	public Bike(Color color,int numberOfGears,CityPanel pan){
 		super(color,numberOfWheels,pan);

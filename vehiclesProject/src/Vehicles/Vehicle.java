@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 /**
@@ -16,11 +15,11 @@ import javax.imageio.ImageIO;
  * @author Tony Schneider,Daniel Sukharev
  */
 public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicle{
-	private static final int MIN_AGE = 18;
 	private static final int MIN_ID = 1000;
 	private static final int MAX_ID = 1000000;
 	private static final int SIZE = 65;
 	private static int count = MIN_ID;
+	protected static final int MIN_AGE = 18;
 	protected int id;
 	protected Boolean lights;
 	protected Color col;

@@ -25,6 +25,7 @@ import Vehicles.benzineEngine;
 import Vehicles.solarEngine;
 
 public class AddVehibleDialogPanel extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private static final int NUM_OF_OPTIONS = 4;
 	private JPanel topPanel,buttomPanel,centerPanel,buttonsPanel,vehicleType,vehicleColor;
 	private final JRadioButton[] typeButtons = new JRadioButton[NUM_OF_OPTIONS],colorButtons = new JRadioButton[NUM_OF_OPTIONS];
@@ -32,7 +33,7 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 	private final ButtonGroup vtGroup = new ButtonGroup(), vcGroup = new ButtonGroup();
 	private JButton Submit,Cancel;
 	private JSlider gears;
-	private final GridBagConstraints c = new GridBagConstraints();//
+	private final GridBagConstraints c = new GridBagConstraints();
 	private static final int FPS_MIN = 0, FPS_MAX = 10, FPS_INIT = 5;
 	private CityPanel city;
 	public AddVehibleDialogPanel(CityPanel city){

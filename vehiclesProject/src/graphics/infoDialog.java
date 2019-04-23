@@ -4,10 +4,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JDialog;
 
-public class infoFrame extends JDialog {
-	private static infoFrame frame = null;
+public class infoDialog extends JDialog {
+	private static final long serialVersionUID = 1L;
+	private static infoDialog frame = null;
 	private infoPanel pane;
-	public infoFrame(){
+	public infoDialog(){
 		setTitle("Vehicle Info");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();//get the screen size.
 		pane = new infoPanel();
@@ -22,9 +23,9 @@ public class infoFrame extends JDialog {
 		add(pane);
 		setSize(new Dimension(pane.getSize().width,pane.getSize().height));//set size of the frame as the size of the background
 	}
-	public static infoFrame getInstance(){
+	public static infoDialog getInstance(){
 		if(frame == null){
-			frame = new infoFrame();
+			frame = new infoDialog();
 		}
 		frame.refreshPane();
 		return frame;
