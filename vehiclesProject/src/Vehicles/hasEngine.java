@@ -42,7 +42,7 @@ public abstract class hasEngine extends Vehicle {
 	public boolean drive(Point p){
 		float dis = this.getCurLocation().getPoint().getDistance(p);
 		if(!super.drive(p)) return false;
-		this.setFuel(this.getFuel()-dis);
+		this.setFuel(this.getFuel()-dis*engine.getLiterPerKM());
 		return true;
 	}
 	public boolean moveable(){

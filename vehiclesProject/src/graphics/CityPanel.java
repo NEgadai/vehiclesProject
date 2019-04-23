@@ -36,6 +36,7 @@ public class CityPanel extends JPanel {
         setPreferredSize(backgroundSize);
         g.drawImage(background, 0, 0,getSize().width, getSize().height,0, 0, background.getWidth(), background.getHeight(), this);//set the background in 0,0 location (drawing the background)
         if(thereVehicle()){
+        	infoPanel.setVehicle(currentVehicle);
         	int Speed = currentVehicle.getSpeed();
         	int size = 65-65%Speed;
         	int endX = (int)backgroundSize.getWidth()-size*3, endY = (int)backgroundSize.getHeight()-size*4,middleY = (int)backgroundSize.getHeight()/2-size*2;

@@ -35,4 +35,5 @@ public class Point {
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
 	}
+	
 }

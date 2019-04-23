@@ -66,7 +66,7 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 		}else if(e.getSource() == lightsButton){
 			city.getVehicle().lightsOnOff();
 		}else if(e.getSource() == infoButton){
-			info =new infoFrame(city.getVehicle());
+			info = infoFrame.getInstance();
 			info.setVisible(true);
 		}else if(e.getSource() == exitButton){
 			System.exit(0);

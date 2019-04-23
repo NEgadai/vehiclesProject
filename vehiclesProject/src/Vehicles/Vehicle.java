@@ -29,7 +29,6 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	protected int fuelConsumption;
 	protected CityPanel pan;
 	protected BufferedImage[] images = new BufferedImage[4];
-//	protected BufferedImage img1 = null, img2 = null, img3 = null, img4 = null;
 	protected float Distance;
 	public Vehicle(Color color,int numberOfWheels,CityPanel pan){
 		setID(count++);
@@ -40,7 +39,6 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 		this.loc = new Location();
 		this.pan = pan;
 		loadImages();
-//		System.out.println(PICTURE_PATH+String.valueOf(this.col).toLowerCase()+this.getSimpleVehicleName()+String.valueOf(Orientation.values()[0])+".png");
 	}
 	public Location getCurLocation(){return this.loc;}
 	public boolean drive(Point p){

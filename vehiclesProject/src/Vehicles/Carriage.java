@@ -12,10 +12,11 @@ import java.awt.Graphics;
 public class Carriage extends Vehicle {
 	private PackAnimal packAnimal = null;
 	private static final int NUMBER_OF_WHEELS = 4;
-	private static int Speed = 1;
+	private static final int Speed = 1;
 	private static final int numberOfPassengers = 2;
 	public Carriage(Color color,CityPanel pan){
 		super(color,NUMBER_OF_WHEELS,pan);
+		packAnimal = new PackAnimal("Dogs");//Meanwhile, the default is dogs. but in the next exercise i believe we'll need to get from the user the name of the animal.
 	}
 	@Override
 	public String toString(){
@@ -28,16 +29,24 @@ public class Carriage extends Vehicle {
 	@Override
 	public String getSimpleVehicleName() {return this.getClass().getSimpleName();}
 	@Override
-	public boolean moveable() {return true;}
+	public boolean moveable() {
+		if(this.packAnimal.getEnergy() > 0)
+			return true;
+		return false;
+		}
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
 	}
 	@Override
-	public float getFuel() {
-		return 0;
-	}
+	public float getFuel() {return this.packAnimal.getEnergy();}
 	@Override
 	public boolean Refuel() {
+		this.packAnimal.ReEnergy();
+		this.fuelConsumption += this.packAnimal.getEnergy();
 		return true;
+	}
+	public boolean drive(Point p){
+		this.packAnimal.eat();
+		return super.drive(p);
 	}
 }

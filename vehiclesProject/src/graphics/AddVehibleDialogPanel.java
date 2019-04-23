@@ -122,17 +122,13 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == Submit){
 			Vehicle vehicle = null;
-//			city = new CityPanel();
 			String colorSelection = vcGroup.getSelection().getActionCommand();
-			
 			String typeSelection = vtGroup.getSelection().getActionCommand();
 			switch(typeSelection){
 			case "Benzine Car":
-				System.out.println("benzine work");
 				vehicle = new Car(Color.valueOf(colorSelection),new benzineEngine(40),city);
 				break;
 			case "Solar Car":
-				System.out.println("solar work");
 				vehicle = new Car(Color.valueOf(colorSelection),new solarEngine(40),city);
 				break;
 			case "Bike":

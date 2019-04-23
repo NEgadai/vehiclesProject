@@ -5,6 +5,7 @@ package Vehicles;
  * @author Tony Schneider,Daniel Sukharev
  */
 public class benzineEngine extends Engine {
+	private static final int literPerKM = 2;
 	public benzineEngine(int fuelTankCapacity){
 		super(fuelTankCapacity);
 		
@@ -12,4 +13,5 @@ public class benzineEngine extends Engine {
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
 	}
+	public int getLiterPerKM(){return this.literPerKM;}
 }

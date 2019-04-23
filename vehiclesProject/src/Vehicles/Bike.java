@@ -10,7 +10,7 @@ import java.awt.Graphics;
  * @author Tony Schneider,Daniel Sukharev
  */
 public class Bike extends Vehicle {
-	private static int Speed = 4;
+	private static final int Speed = 4;
 	private int numberOfGears;
 	private static final int numberOfPassengers = 1;
 	private static final int numberOfWheels = 2;

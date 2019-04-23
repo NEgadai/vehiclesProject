@@ -12,7 +12,7 @@ import java.awt.Graphics;
 public class Car extends hasEngine {
 //	private static final int MAX_FUEL_CAPACITY = 40;
 	private static final int NUMBER_OF_WHEELS = 4;
-	private static int Speed = 4;
+	private static final int Speed = 4;
 	private static final int numberOfPassengers = 5;
 	public Car(Color color,Engine engine,CityPanel pan){
 		super(color,engine,NUMBER_OF_WHEELS,pan);
