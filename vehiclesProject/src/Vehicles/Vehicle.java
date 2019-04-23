@@ -19,8 +19,8 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	private static final int MIN_AGE = 18;
 	private static final int MIN_ID = 1000;
 	private static final int MAX_ID = 1000000;
+	private static final int SIZE = 65;
 	private static int count = MIN_ID;
-	protected final int size = 65;
 	protected int id;
 	protected Boolean lights;
 	protected Color col;
@@ -88,13 +88,13 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	}
 	public void drawObject(Graphics g) {
 		if(loc.getOrientation()==Orientation.North)
-			g.drawImage(images[0], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), size, size*2, pan);
+			g.drawImage(images[0], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE, SIZE*2, pan);
 		else if(this.getCurLocation().getOrientation()==Orientation.South)
-			g.drawImage(images[1], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), size, size*2, pan);
+			g.drawImage(images[1], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE, SIZE*2, pan);
 		else if(this.getCurLocation().getOrientation()==Orientation.East)
-			g.drawImage(images[2], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), size*2, size, pan);
+			g.drawImage(images[2], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE*2, SIZE, pan);
 		else if(this.getCurLocation().getOrientation()==Orientation.West)
-			g.drawImage(images[3], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), size*2, size, pan);
+			g.drawImage(images[3], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE*2, SIZE, pan);
 	}
 	public Point nextLocation(){
 		if(loc.getOrientation() == Orientation.East){

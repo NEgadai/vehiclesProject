@@ -25,14 +25,15 @@ import Vehicles.benzineEngine;
 import Vehicles.solarEngine;
 
 public class AddVehibleDialogPanel extends JPanel implements ActionListener {
+	private static final int NUM_OF_OPTIONS = 4;
 	private JPanel topPanel,buttomPanel,centerPanel,buttonsPanel,vehicleType,vehicleColor;
-	private final JRadioButton[] typeButtons = new JRadioButton[4],colorButtons = new JRadioButton[4];
+	private final JRadioButton[] typeButtons = new JRadioButton[NUM_OF_OPTIONS],colorButtons = new JRadioButton[NUM_OF_OPTIONS];
 	private final String[] typeTexts = {"Benzine Car","Solar Car","Bike","Carriage"},colorTexts = {"Red","Green","Silver","White"};
 	private final ButtonGroup vtGroup = new ButtonGroup(), vcGroup = new ButtonGroup();
 	private JButton Submit,Cancel;
 	private JSlider gears;
-	private final GridBagConstraints c = new GridBagConstraints();
-	private final int FPS_MIN = 0, FPS_MAX = 10, FPS_INIT = 5;
+	private final GridBagConstraints c = new GridBagConstraints();//
+	private static final int FPS_MIN = 0, FPS_MAX = 10, FPS_INIT = 5;
 	private CityPanel city;
 	public AddVehibleDialogPanel(CityPanel city){
 		this.city = city;
@@ -47,7 +48,7 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 		vehicleColor = new JPanel(new GridBagLayout());
 		vehicleColor.setBorder(BorderFactory.createTitledBorder("Choose a color"));
 		
-		for(int i=0;i<4;i++){
+		for(int i=0;i<NUM_OF_OPTIONS;i++){
 			typeButtons[i] = new JRadioButton(typeTexts[i]);
 			typeButtons[i].setActionCommand(typeTexts[i]);
 			if(i == 0)
@@ -62,7 +63,7 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 				vehicleType.add(typeButtons[i],c);
 			}
 		}
-		for(int i=0;i<4;i++){
+		for(int i=0;i<NUM_OF_OPTIONS;i++){
 			colorButtons[i] = new JRadioButton(colorTexts[i]);
 			colorButtons[i].setActionCommand(colorTexts[i]);
 			if(i == 0)

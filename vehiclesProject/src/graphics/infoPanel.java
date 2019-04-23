@@ -1,11 +1,15 @@
 package graphics;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 
 import Vehicles.Vehicle;
 
@@ -16,15 +20,24 @@ public class infoPanel extends JPanel {
 	private static final ArrayList<Integer> IDs = new ArrayList<Integer>();
 	private static String[][] data = new String[listOfVehicles.size()][];;
 	public infoPanel(){
-//		String[][] data = {{vehicle.getVehicleName(),String.valueOf(vehicle.getID()),vehicle.getColor(),String.valueOf(vehicle.getWheels()),String.valueOf(vehicle.getSpeed()),String.valueOf(vehicle.getFuel()),String.valueOf(vehicle.getDistance()),String.valueOf(vehicle.getFuelConsumption()),vehicle.getLights()}}; 
 		j = new JTable(data, columnNames); 
-		j.setSize(new Dimension(1000,80));
-		j.setPreferredScrollableViewportSize(j.getSize());
+		j.setPreferredScrollableViewportSize(j.getPreferredSize());
 		j.setFillsViewportHeight(true);
-//		j.setFont(new Font("Arial",Font.,15));
-		setSize(j.getSize().width+10,j.getSize().height+20*(listOfVehicles.size()-1)); 
 		JScrollPane sp = new JScrollPane(j); 
-		add(sp);
+		if(listOfVehicles.size() == 0){
+			JLabel noVehicles = new JLabel("There were no vehicles yet",SwingConstants.CENTER);
+			noVehicles.setForeground(Color.RED);
+			setSize(1400,80); 
+			setLayout(new GridLayout(2,1));
+			add(sp);
+			add(noVehicles);
+			
+		}
+		else{
+			setSize(1400,55+j.getPreferredSize().height); 
+			setLayout(new GridLayout(1,1));
+			add(sp);
+		}
 	}
 	
 	public static void setVehicle(Vehicle vehicle){
@@ -39,7 +52,6 @@ public class infoPanel extends JPanel {
 				IDs.add(vehicle.getID());
 			}
 		}
-		
 		data = new String[listOfVehicles.size()][];
 		for(int i=0;i<listOfVehicles.size();i++){
 			data[i] = listOfVehicles.get(i);

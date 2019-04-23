@@ -12,5 +12,5 @@ public class solarEngine extends Engine {
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
 	}
-	public int getLiterPerKM(){return this.literPerKM;}
+	public int getLiterPerKM(){return literPerKM;}
 }

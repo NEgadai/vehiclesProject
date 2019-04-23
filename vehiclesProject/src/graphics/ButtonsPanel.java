@@ -59,12 +59,21 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 			}
 		}
 		else if(e.getSource() == clearButton){
-			city.removeVehicle();
+			if(CityPanel.thereVehicle())
+				city.removeVehicle();
+			else
+				JOptionPane.showMessageDialog(null, "No vehicles.");
 		}else if(e.getSource() == fuelFoodButton){
-			if(city.getVehicle() instanceof Car)
-				city.getVehicle().Refuel();
+			if(CityPanel.thereVehicle()){
+				if(city.getVehicle() instanceof Car)
+					city.getVehicle().Refuel();
+			}else
+				JOptionPane.showMessageDialog(null, "No vehicles.");
 		}else if(e.getSource() == lightsButton){
-			city.getVehicle().lightsOnOff();
+			if(CityPanel.thereVehicle())
+				city.getVehicle().lightsOnOff();
+			else
+				JOptionPane.showMessageDialog(null, "No vehicles.");
 		}else if(e.getSource() == infoButton){
 			info = infoFrame.getInstance();
 			info.setVisible(true);
