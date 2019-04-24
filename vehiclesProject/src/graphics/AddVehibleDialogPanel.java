@@ -52,30 +52,23 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 		for(int i=0;i<NUM_OF_OPTIONS;i++){
 			typeButtons[i] = new JRadioButton(typeTexts[i]);
 			typeButtons[i].setActionCommand(typeTexts[i]);
-			if(i == 0)
-				typeButtons[i].setSelected(true);
-			typeButtons[i].addActionListener(this);
-			vtGroup.add(typeButtons[i]);
-			if(i>1){
-				c.gridy = 1;
-				vehicleType.add(typeButtons[i],c);
-			}else{
-				c.gridy = 0;
-				vehicleType.add(typeButtons[i],c);
-			}
-		}
-		for(int i=0;i<NUM_OF_OPTIONS;i++){
 			colorButtons[i] = new JRadioButton(colorTexts[i]);
 			colorButtons[i].setActionCommand(colorTexts[i]);
-			if(i == 0)
+			if(i == 0){
+				typeButtons[i].setSelected(true);
 				colorButtons[i].setSelected(true);
+			}
+			typeButtons[i].addActionListener(this);
 			colorButtons[i].addActionListener(this);
+			vtGroup.add(typeButtons[i]);
 			vcGroup.add(colorButtons[i]);
 			if(i>1){
 				c.gridy = 1;
+				vehicleType.add(typeButtons[i],c);
 				vehicleColor.add(colorButtons[i],c);
 			}else{
 				c.gridy = 0;
+				vehicleType.add(typeButtons[i],c);
 				vehicleColor.add(colorButtons[i],c);
 			}
 		}

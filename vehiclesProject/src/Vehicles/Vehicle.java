@@ -27,7 +27,7 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	protected Location loc;
 	protected int fuelConsumption;
 	protected CityPanel pan;
-	protected BufferedImage[] images = new BufferedImage[4];
+	protected final BufferedImage[] images = new BufferedImage[4];
 	protected float Distance;
 	public Vehicle(Color color,int numberOfWheels,CityPanel pan){
 		setID(count++);

@@ -1,6 +1,5 @@
 package graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,49 +8,28 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Vehicles.Car;
+import Vehicles.Carriage;
 
 public class ButtonsPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private JButton addVehibleButton,clearButton,fuelFoodButton,lightsButton,infoButton,exitButton;
+	private static final int NUM_OF_BUTTONS = 6;
+	private JButton[] buttons = new JButton[NUM_OF_BUTTONS];
+	private String[] buttonsText = new String[]{"Add Vehicle","Clear","Fuel/Food","Lights","Info","Exit"};
 	private static AddVehicleDialog avd;
 	private CityPanel city;
 	private infoDialog info;
 	public ButtonsPanel(CityPanel city){
 		this.city = city;
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();//for configure the buttons
-	    c.fill = GridBagConstraints.BOTH;//Fill all size space of the frame
-		addVehibleButton = new JButton("Add Vehicle");
-		addVehibleButton.addActionListener(this);
-		c.weightx = 10/6;//the division of space for 6 buttons.
-	    c.weighty = 1.0;//fill all Y space 
-	    c.gridx = 0;//set the items like on the graph 
-	    c.gridy = 0;
-		add(addVehibleButton,c);
-		clearButton = new JButton("Clear");
-		clearButton.addActionListener(this);
-	    c.gridx = 1;
-		add(clearButton,c);
-		fuelFoodButton = new JButton("Fuel/Food");
-		fuelFoodButton.addActionListener(this);
-	    c.gridx = 2;
-		add(fuelFoodButton,c);
-		lightsButton = new JButton("Lights");
-		lightsButton.addActionListener(this);
-	    c.gridx = 3;
-		add(lightsButton,c);
-		infoButton = new JButton("Info");
-		infoButton.addActionListener(this);
-	    c.gridx = 4;
-		add(infoButton,c);
-		exitButton = new JButton("Exit");
-		exitButton.addActionListener(this);
-	    c.gridx = 5;
-		add(exitButton,c);
+		setLayout(new GridLayout(1,6));
+		for(int i=0;i<buttons.length;i++){
+			buttons[i] = new JButton(buttonsText[i]);
+			buttons[i].addActionListener(this);
+			add(buttons[i]);
+		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == addVehibleButton){
+		if(e.getSource() == buttons[0]){
 			if(CityPanel.thereVehicle())//Check if CityPanel exists current vehicle.
 				JOptionPane.showMessageDialog(null, "Error,There is already a vehicle.");
 			else{
@@ -59,26 +37,25 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 				avd.setVisible(true);
 			}
 		}
-		else if(e.getSource() == clearButton){
+		else if(e.getSource() == buttons[1]){
 			if(CityPanel.thereVehicle())
 				city.removeVehicle();
 			else
 				JOptionPane.showMessageDialog(null, "No vehicles.");
-		}else if(e.getSource() == fuelFoodButton){
+		}else if(e.getSource() == buttons[2]){
 			if(CityPanel.thereVehicle()){
-				if(city.getVehicle() instanceof Car)
-					city.getVehicle().Refuel();
+				city.getVehicle().Refuel();
 			}else
 				JOptionPane.showMessageDialog(null, "No vehicles.");
-		}else if(e.getSource() == lightsButton){
+		}else if(e.getSource() == buttons[3]){
 			if(CityPanel.thereVehicle())
 				city.getVehicle().lightsOnOff();
 			else
 				JOptionPane.showMessageDialog(null, "No vehicles.");
-		}else if(e.getSource() == infoButton){
+		}else if(e.getSource() == buttons[4]){
 			info = infoDialog.getInstance();
 			info.setVisible(true);
-		}else if(e.getSource() == exitButton){
+		}else if(e.getSource() == buttons[5]){
 			System.exit(0);
 		}
 	}
