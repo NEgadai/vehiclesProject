@@ -10,7 +10,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
+/**
+ * 
+ * @author Tony Schneider (205515828) ,Daniel Sukharev (205583008)
+ * Campus: Ashdod.
+ * 
+ */
 public class CityFrame extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static Dimension frameSize;
@@ -34,6 +39,9 @@ public class CityFrame extends JFrame implements ActionListener {
 		setResizable(false);
 		pack(); 
 	}
+	/**
+	 * Setting the menu of the window.
+	 */
 	private void setMenu(){
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
@@ -48,6 +56,9 @@ public class CityFrame extends JFrame implements ActionListener {
 		menuBar.add(helpMenu);
 		this.setJMenuBar(menuBar);
 	}
+	/**
+	 * This method is responsible for all action listener of the buttons and components
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exitItem){
@@ -57,9 +68,19 @@ public class CityFrame extends JFrame implements ActionListener {
 		}
 	}
 	//Static methods:
+	/**
+	 * The main.
+	 * @param args
+	 * 		  The arguments.
+	 */
 	public static void main(String []args){
 		CityFrame frame = new CityFrame("City");
 		frame.setVisible(true); 
 	}
+	/**
+	 * Get Frame Size.
+	 * 
+	 * @return frame size.
+	 */
 	public static Dimension getFrameSize(){return frameSize;}
 }

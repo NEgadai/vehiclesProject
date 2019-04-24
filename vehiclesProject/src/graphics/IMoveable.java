@@ -1,7 +1,11 @@
 package graphics;
 
 import Vehicles.Point;
-
+/**
+ * A Moveable Interface.
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public interface IMoveable {
 	public String getVehicleName();
 	public String getSimpleVehicleName();

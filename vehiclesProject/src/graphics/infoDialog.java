@@ -3,7 +3,10 @@ package graphics;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JDialog;
-
+/**
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public class infoDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private static infoDialog frame = null;
@@ -17,12 +20,20 @@ public class infoDialog extends JDialog {
 		setLocation(screenSize.width/2-getSize().width/2, screenSize.height/2-getSize().height/2);//set the frame in the middle of the screen
 		setResizable(false);
 	}
+	/**
+	 * Refresh Pane.
+	 */
 	public void refreshPane(){
 		remove(pane);
 		pane = new infoPanel();
 		add(pane);
 		setSize(new Dimension(pane.getSize().width,pane.getSize().height));//set size of the frame as the size of the background
 	}
+	/**
+	 * Get Instance. SINGELTON
+	 * 
+	 * @return frame.
+	 */
 	public static infoDialog getInstance(){
 		if(frame == null){
 			frame = new infoDialog();

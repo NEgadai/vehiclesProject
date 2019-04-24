@@ -7,9 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Vehicles.Car;
-import Vehicles.Carriage;
-
+/**
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public class ButtonsPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final int NUM_OF_BUTTONS = 6;
@@ -27,6 +28,9 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 			add(buttons[i]);
 		}
 	}
+	/**
+	 * This method is responsible for all action listener of the buttons and components
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == buttons[0]){
@@ -59,5 +63,8 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 			System.exit(0);
 		}
 	}
+	/**
+	 * Invisible
+	 */
 	public static void unVisible(){avd.setVisible(false);}
 }

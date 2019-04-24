@@ -11,7 +11,10 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 import Vehicles.Vehicle;
-
+/**
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public class infoPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable j;
@@ -39,7 +42,12 @@ public class infoPanel extends JPanel {
 			add(sp);
 		}
 	}
-	
+	/**
+	 * Set Vehicle
+	 * 
+	 * @param vehicle
+	 * 		  A Vehicle object.
+	 */
 	public static void setVehicle(Vehicle vehicle){
 		if(vehicle != null){
 			if(IDs.contains(vehicle.getID())){

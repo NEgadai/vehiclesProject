@@ -29,6 +29,16 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	protected CityPanel pan;
 	protected final BufferedImage[] images = new BufferedImage[4];
 	protected float Distance;
+	/**
+	 * A Class Constructor.
+	 * 
+	 * @param color
+	 * 		  The Vehicle color.
+	 * @param numberOfWheels
+	 * 		  The number of wheels.
+	 * @param pan
+	 * 		  A CityPanel object.
+	 */
 	public Vehicle(Color color,int numberOfWheels,CityPanel pan){
 		setID(count++);
 		this.Distance = 0;
@@ -39,7 +49,18 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 		this.pan = pan;
 		loadImages();
 	}
+	/**
+	 * Get Current Location.
+	 * 
+	 * @return Current Location.
+	 */
 	public Location getCurLocation(){return this.loc;}
+	/**
+	 * Change a vehicles Location,and kilometer.
+	 * @param p
+	 * 		  A Point object that describes the vehicle location.
+	 * @return true, else false.
+	 */
 	public boolean drive(Point p){
 		if(p == null)
 			return false;
@@ -47,33 +68,92 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 		getCurLocation().setPoint(p);
 		return true;
 	}
+	/**
+	 * Creates a string representation.
+	 * 
+	 * @return A string representation.
+	 */
 	public String toString(){
 		return " "+this.id+" - [color:"+this.col+", number of wheels:"+this.wheels+", KM:"+this.Distance+", current location:"+this.loc+", Fuel Consumption:"+this.fuelConsumption;
 	}
+	/**
+	 * Set lights.
+	 * 
+	 * @return true.
+	 */
 	public boolean lightsOnOff(){this.lights = !this.lights; return true;}
+	/**
+	 * Get ID.
+	 * 
+	 * @return ID.
+	 */
 	public int getID(){return this.id;}
+	/**
+	 * Set ID.
+	 * 
+	 * @param ID
+	 * 		  The Vehicle ID.
+	 * @return true,else if ID wrong - false.
+	 */
 	public boolean setID(int ID){
 		if(ID < MIN_ID || ID > MAX_ID)
 			return false;
 		this.id = ID;
 		return true;
 	}
+	/**
+	 * Get Wheels.
+	 * 
+	 * @return wheels.
+	 */
 	public int getWheels(){return this.wheels;}
+	/**
+	 * Get Color.
+	 * 
+	 * @return color.
+	 */
 	public String getColor() {return String.valueOf(this.col);}
+	/**
+	 * Get Distance.
+	 * 
+	 * @return Distance.
+	 */
 	public float getDistance(){return this.Distance;}
+	/**
+	 * Get Lights.
+	 * 
+	 * @return lights.
+	 */
 	public String getLights(){
 		if(lights)
 			return "On";
 		return "Off";
 	}
+	/**
+	 * Get Fuel Consumption.
+	 * 
+	 * @return fuel consumption.
+	 */
 	public int getFuelConsumption(){return this.fuelConsumption;}
+	/**
+	 * Add Fuel Consumption.
+	 * 
+	 * @param fuelConsumption
+	 * 		  A fuel consumption.
+	 */
 	public void addFuelConsumption(int fuelConsumption){this.fuelConsumption = this.fuelConsumption + fuelConsumption;}
+	/**
+	 * A loader Images.
+	 */
 	public void loadImages() {
 		for(int i=0;i<images.length;i++){
 			try { images[i] = ImageIO.read(new File(PICTURE_PATH+String.valueOf(this.col).toLowerCase()+this.getSimpleVehicleName()+String.valueOf(Orientation.values()[i])+".png")); } 
 			  catch (IOException e) { System.out.println("Cannot load image"); }
 		}
 	}
+	/**
+	 * Moving object on a road.
+	 */
 	public void move(Point p) {
 		if(this.moveable()){
 			try {
@@ -85,6 +165,9 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 		}
 		pan.repaint();
 	}
+	/**
+	 * Drawing object on a road.
+	 */
 	public void drawObject(Graphics g) {
 		if(loc.getOrientation()==Orientation.North)
 			g.drawImage(images[0], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE, SIZE*2, pan);
@@ -95,6 +178,11 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 		else if(this.getCurLocation().getOrientation()==Orientation.West)
 			g.drawImage(images[3], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE*2, SIZE, pan);
 	}
+	/**
+	 * The next location of the object.
+	 * 
+	 * @return location.
+	 */
 	public Point nextLocation(){
 		if(loc.getOrientation() == Orientation.East){
 			return new Point(loc.getPoint().getX()+getSpeed(),loc.getPoint().getY());
@@ -107,6 +195,11 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 		}
 		return loc.getPoint();
 	}
+	/**
+	 * Clone Object.
+	 * 
+	 * @return New copy of this object.
+	 */
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
 	}

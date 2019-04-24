@@ -1,5 +1,9 @@
 package Vehicles;
-
+/**
+ * A Vehicle Interface.
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public interface IVehicle {
 	public String getVehicleName();
 	public int getID();

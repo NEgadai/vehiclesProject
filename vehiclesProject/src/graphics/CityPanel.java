@@ -13,14 +13,26 @@ import javax.swing.JPanel;
 import Vehicles.Orientation;
 import Vehicles.Point;
 import Vehicles.Vehicle;
-
+/**
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public class CityPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Vehicle currentVehicle;
 	private BufferedImage background = loadImage();
 	private Dimension backgroundSize = new Dimension(background.getWidth(),background.getHeight());
+	/**
+	 * Get Background Size.
+	 * @return background size.
+	 */
 	public Dimension getBackgroundSize(){return this.backgroundSize;}
 	private static boolean vehicleExists = false;
+	/**
+	 * This method is responsible for the loading the background into the panel. 
+	 * 
+	 * @return result.
+	 */
 	private BufferedImage loadImage(){
         URL imagePath = getClass().getResource("/images/cityBackground.png");
         BufferedImage result = null;
@@ -31,6 +43,9 @@ public class CityPanel extends JPanel {
         }
         return result;
     }
+	/**
+	 * This method is responsible for the pain of the panel.
+	 */
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);//Call the default method due to overriding.
@@ -71,15 +86,28 @@ public class CityPanel extends JPanel {
         	currentVehicle.move(currentVehicle.nextLocation());
         }
     }
+	/**
+	 * 
+	 * @return vehicle exists.
+	 */
 	public static boolean thereVehicle(){
 		return vehicleExists;
 	}
+	/**
+	 * Set Vehicle.
+	 * 
+	 * @param vehicle
+	 * 		  A Vehicle object.
+	 */
 	public void setVehicle(Vehicle vehicle){
 		currentVehicle = vehicle;
 		vehicleExists = true;
 		repaint();
 	}
 	public Vehicle getVehicle(){return currentVehicle;}
+	/**
+	 * Remove vehicle.
+	 */
 	public void removeVehicle(){
 		currentVehicle = null;
 		vehicleExists = false;

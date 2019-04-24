@@ -23,7 +23,11 @@ import Vehicles.Color;
 import Vehicles.Vehicle;
 import Vehicles.benzineEngine;
 import Vehicles.solarEngine;
-
+/**
+ * A class inherits from JPanel
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final int NUM_OF_OPTIONS = 4;
@@ -113,6 +117,9 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 		add(buttomPanel,BorderLayout.PAGE_END);
 		
 	}
+	/**
+	 * This method is responsible for all action listener of the buttons and components
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == Submit){
@@ -139,7 +146,7 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 			ButtonsPanel.unVisible();
 		}else if(e.getSource() == typeButtons[2]){
 			centerPanel.setVisible(true);
-		}else
+		}else if(e.getSource() == typeButtons[0] || e.getSource() == typeButtons[1] || e.getSource() == typeButtons[3])
 			centerPanel.setVisible(false);
 	}
 }

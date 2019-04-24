@@ -3,7 +3,11 @@ package graphics;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JDialog;
-
+/**
+ * A class inherits from Dialog
+ * 
+ * @author Tony Schneider,Daniel Sukharev
+ */
 public class AddVehicleDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	public AddVehicleDialog(CityPanel city){
