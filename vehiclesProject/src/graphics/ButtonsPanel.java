@@ -34,32 +34,25 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == buttons[0]){
-			if(CityPanel.thereVehicle())//Check if CityPanel exists current vehicle.
-				JOptionPane.showMessageDialog(null, "Error,There is already a vehicle.");
+			if(CityPanel.thereAreFiveVehicles())//Check if CityPanel exists current vehicle.
+				JOptionPane.showMessageDialog(null, "Error,There are 5 vehicles.");
 			else{
 				avd = new  AddVehicleDialog(city);
 				avd.setVisible(true);
 			}
 		}
 		else if(e.getSource() == buttons[1]){
-			if(CityPanel.thereVehicle())
-				city.removeVehicle();
-			else
-				JOptionPane.showMessageDialog(null, "No vehicles.");
+			city.clear();
 		}else if(e.getSource() == buttons[2]){
-			if(CityPanel.thereVehicle()){
-				city.getVehicle().Refuel();
-			}else
-				JOptionPane.showMessageDialog(null, "No vehicles.");
+			
+			city.Refuel();
 		}else if(e.getSource() == buttons[3]){
-			if(CityPanel.thereVehicle())
-				city.getVehicle().lightsOnOff();
-			else
-				JOptionPane.showMessageDialog(null, "No vehicles.");
+			city.lightsOnOff();
 		}else if(e.getSource() == buttons[4]){
 			info = infoDialog.getInstance();
 			info.setVisible(true);
 		}else if(e.getSource() == buttons[5]){
+			city.interuptAll();
 			System.exit(0);
 		}
 	}

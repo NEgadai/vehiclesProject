@@ -18,7 +18,7 @@ import Vehicles.Vehicle;
 public class infoPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable j;
-	private static final String[] columnNames = { "Vehicle","ID","Color","Wheels","Speed","Fuel/Energy","Distance","Fuel/Energy consumption","Lights" }; ;
+	private static final String[] columnNames = { "Vehicle","ID","Color","Wheels","Speed","Fuel/Energy","Distance","Fuel/Energy consumption","Lights","Crashed With.." }; ;
 	private static final ArrayList<String[]> listOfVehicles = new ArrayList<String[]>();
 	private static final ArrayList<Integer> IDs = new ArrayList<Integer>();
 	private static String[][] data = new String[listOfVehicles.size()][];;
@@ -53,16 +53,21 @@ public class infoPanel extends JPanel {
 			if(IDs.contains(vehicle.getID())){
 				for(int i=0;i<listOfVehicles.size();i++)
 					if(listOfVehicles.get(i)[1].equals(String.valueOf(vehicle.getID())))
-						listOfVehicles.set(i, new String[]{vehicle.getVehicleName(),String.valueOf(vehicle.getID()),vehicle.getColor(),String.valueOf(vehicle.getWheels()),String.valueOf(vehicle.getSpeed()),String.valueOf(vehicle.getFuel()),String.valueOf(vehicle.getDistance()),String.valueOf(vehicle.getFuelConsumption()),vehicle.getLights()});
+						listOfVehicles.set(i, new String[]{vehicle.getVehicleName(),String.valueOf(vehicle.getID()),vehicle.getColor(),String.valueOf(vehicle.getWheels()),String.valueOf(vehicle.getSpeed()),String.valueOf(vehicle.getFuel()),String.valueOf(vehicle.getDistance()),String.valueOf(vehicle.getFuelConsumption()),vehicle.getLights(),""});
 			}		
 			else{
-				listOfVehicles.add(new String[]{vehicle.getVehicleName(),String.valueOf(vehicle.getID()),vehicle.getColor(),String.valueOf(vehicle.getWheels()),String.valueOf(vehicle.getSpeed()),String.valueOf(vehicle.getFuel()),String.valueOf(vehicle.getDistance()),String.valueOf(vehicle.getFuelConsumption()),vehicle.getLights()});
+				listOfVehicles.add(new String[]{vehicle.getVehicleName(),String.valueOf(vehicle.getID()),vehicle.getColor(),String.valueOf(vehicle.getWheels()),String.valueOf(vehicle.getSpeed()),String.valueOf(vehicle.getFuel()),String.valueOf(vehicle.getDistance()),String.valueOf(vehicle.getFuelConsumption()),vehicle.getLights(),""});
 				IDs.add(vehicle.getID());
 			}
 		}
 		data = new String[listOfVehicles.size()][];
-		for(int i=0;i<listOfVehicles.size();i++){
+		for(int i=0;i<listOfVehicles.size();i++)
 			data[i] = listOfVehicles.get(i);
-		}
+	}
+	public static void setCrashed(int ID1, int ID2){
+		for(int i=0;i<listOfVehicles.size();i++)
+			if(listOfVehicles.get(i)[1].equals(String.valueOf(ID1)))
+				listOfVehicles.set(i, new String[]{listOfVehicles.get(i)[0],listOfVehicles.get(i)[1],listOfVehicles.get(i)[2],listOfVehicles.get(i)[3],listOfVehicles.get(i)[4],listOfVehicles.get(i)[5],listOfVehicles.get(i)[6],listOfVehicles.get(i)[7],listOfVehicles.get(i)[8],String.valueOf(ID2)});
+
 	}
 }

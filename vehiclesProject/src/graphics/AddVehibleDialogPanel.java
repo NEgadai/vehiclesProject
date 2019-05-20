@@ -140,7 +140,8 @@ public class AddVehibleDialogPanel extends JPanel implements ActionListener {
 				vehicle = new Carriage(Color.valueOf(colorSelection),city);
 				break;
 			}
-			city.setVehicle(vehicle);
+			infoPanel.setVehicle(vehicle);
+			city.addVehicle(vehicle);
 			ButtonsPanel.unVisible();
 		}else if(e.getSource() == Cancel){
 			ButtonsPanel.unVisible();

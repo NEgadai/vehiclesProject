@@ -13,6 +13,7 @@ public class Car extends hasEngine {
 	/**
 	 * The number of wheels.
 	 */
+	private final int Durabilit = 5;
 	private static final int NUMBER_OF_WHEELS = 4;
 	/**
 	 * The Car speed.
@@ -77,5 +78,9 @@ public class Car extends hasEngine {
 	 */
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
+	}
+	@Override
+	public int getDurability() {
+		return Durabilit;
 	}
 }

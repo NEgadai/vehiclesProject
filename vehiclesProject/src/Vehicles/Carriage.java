@@ -12,6 +12,7 @@ public class Carriage extends Vehicle {
 	/**
 	 * The number of wheels.
 	 */
+	private final int Durabilit = 4;
 	private static final int NUMBER_OF_WHEELS = 4;
 	/**
 	 * The Carriage speed.
@@ -107,5 +108,9 @@ public class Carriage extends Vehicle {
 	public boolean drive(Point p){
 		this.packAnimal.eat();
 		return super.drive(p);
+	}
+	@Override
+	public int getDurability() {
+		return Durabilit;
 	}
 }

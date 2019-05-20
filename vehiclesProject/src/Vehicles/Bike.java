@@ -12,6 +12,7 @@ public class Bike extends Vehicle {
 	/**
 	 * The Bike speed.
 	 */
+	private final int Durabilit = 2;
 	private static final int Speed = 4;
 	private int numberOfGears;
 //	private static final int numberOfPassengers = 1;
@@ -93,4 +94,8 @@ public class Bike extends Vehicle {
 	 * @return true.
 	 */
 	public boolean Refuel(){return true;}
+	@Override
+	public int getDurability() {
+		return Durabilit;
+	}
 }

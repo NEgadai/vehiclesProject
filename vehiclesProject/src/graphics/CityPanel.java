@@ -5,6 +5,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -13,21 +17,25 @@ import javax.swing.JPanel;
 import Vehicles.Orientation;
 import Vehicles.Point;
 import Vehicles.Vehicle;
+import Vehicles.vehicleThread;
 /**
  * 
  * @author Tony Schneider,Daniel Sukharev
  */
 public class CityPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private Vehicle currentVehicle;
+	private static boolean AreTherefiveArchive = false;
+	private HashMap<Integer, vehicleThread> currentVehicles = new HashMap<Integer, vehicleThread>();
+	private Queue<Vehicle> archiveVehicles = new LinkedList<>();
+//	private HashMap<Integer, vehicleThread> archiveVehicles = new HashMap<Integer, vehicleThread>();
+//	private ArrayList<vehicleThread> currentVehicles = new ArrayList<vehicleThread>();
+//	private ArrayList<vehicleThread> archiveVehicles = new ArrayList<vehicleThread>();
 	private BufferedImage background = loadImage();
-	private Dimension backgroundSize = new Dimension(background.getWidth(),background.getHeight());
-	/**
-	 * Get Background Size.
-	 * @return background size.
-	 */
-	public Dimension getBackgroundSize(){return this.backgroundSize;}
-	private static boolean vehicleExists = false;
+	private static Dimension backgroundSize;
+	public static Dimension getBackgroundSize(){return backgroundSize;}
+	public CityPanel(){
+		backgroundSize = new Dimension(background.getWidth(),background.getHeight());
+	}
 	/**
 	 * This method is responsible for the loading the background into the panel. 
 	 * 
@@ -46,71 +54,105 @@ public class CityPanel extends JPanel {
 	/**
 	 * This method is responsible for the pain of the panel.
 	 */
+	public void Refuel(){
+		synchronized(currentVehicles){
+			currentVehicles.forEach((id,vThread)->{
+				vThread.getVehicle().Refuel();
+				vThread.notify();
+			});
+		}
+	}
+	public static boolean thereAreFiveVehicles(){
+		return AreTherefiveArchive;
+	}
+	public void lightsOnOff(){
+		currentVehicles.forEach((id,vThread)->{
+			vThread.getVehicle().lightsOnOff();
+		});
+	}
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);//Call the default method due to overriding.
         setPreferredSize(backgroundSize);
         g.drawImage(background, 0, 0,getSize().width, getSize().height,0, 0, background.getWidth(), background.getHeight(), this);//set the background in 0,0 location (drawing the background)
-        if(thereVehicle()){
-        	infoPanel.setVehicle(currentVehicle);
-        	int Speed = currentVehicle.getSpeed(), size = 65-65%Speed;
-        	int endX = (int)backgroundSize.getWidth()-size*3, endY = (int)backgroundSize.getHeight()-size*4,middleY = (int)backgroundSize.getHeight()/2-size*2;
-        	endX = endX-endX%Speed;
-        	endY = endY-endY%Speed;
-        	middleY = middleY-middleY%Speed;
-        	Random rand = new Random();
-        	if(currentVehicle.getCurLocation().getPoint().getX() == endX && currentVehicle.getCurLocation().getOrientation() == Orientation.East){
-        		currentVehicle.getCurLocation().setOrientation(Orientation.South);
-        		currentVehicle.getCurLocation().setPoint(new Point((int)(endX+size*1.5),currentVehicle.getCurLocation().getPoint().getY()+size));
-        	}else if(currentVehicle.getCurLocation().getPoint().getY() == middleY && currentVehicle.getCurLocation().getOrientation() == Orientation.South){
-        		if(rand.nextBoolean()){
-        			currentVehicle.getCurLocation().setOrientation(Orientation.West);
-        			currentVehicle.getCurLocation().setPoint(new Point(endX,middleY+size));
-        		}
-        	}else if(currentVehicle.getCurLocation().getPoint().getY() == endY && currentVehicle.getCurLocation().getOrientation() == Orientation.South){
-        		currentVehicle.getCurLocation().setOrientation(Orientation.West);
-        		currentVehicle.getCurLocation().setPoint(new Point(endX,(int)(endY+size*1.5)));
-        	}else if(currentVehicle.getCurLocation().getPoint().getX() == size && currentVehicle.getCurLocation().getOrientation() == Orientation.West){
-        		currentVehicle.getCurLocation().setOrientation(Orientation.North);
-        		currentVehicle.getCurLocation().setPoint(new Point(0,currentVehicle.getCurLocation().getPoint().getY()-size));
-        	}else if(currentVehicle.getCurLocation().getPoint().getY() == middleY+size && currentVehicle.getCurLocation().getOrientation() == Orientation.North){
-        		if(rand.nextBoolean()){
-        			currentVehicle.getCurLocation().setOrientation(Orientation.East);
-            		currentVehicle.getCurLocation().setPoint(new Point(size,middleY+size));
-        		}
-        	}else if(currentVehicle.getCurLocation().getPoint().getY() == size && currentVehicle.getCurLocation().getOrientation() == Orientation.North){
-        		currentVehicle.getCurLocation().setOrientation(Orientation.East);
-        		currentVehicle.getCurLocation().setPoint(new Point(size,0));
-        	}
-        	currentVehicle.drawObject(g);
-        	currentVehicle.move(currentVehicle.nextLocation());
+        synchronized(this) {
+	        currentVehicles.forEach((id,vThread)->{
+	        	vThread.getVehicle().drawObject(g);
+	        });
         }
+        
     }
 	/**
 	 * 
 	 * @return vehicle exists.
 	 */
-	public static boolean thereVehicle(){
-		return vehicleExists;
-	}
+//	public static boolean thereVehicle(){
+//		return vehicleExists;
+//	}
 	/**
 	 * Set Vehicle.
 	 * 
 	 * @param vehicle
 	 * 		  A Vehicle object.
 	 */
-	public void setVehicle(Vehicle vehicle){
-		currentVehicle = vehicle;
-		vehicleExists = true;
+	public void addVehicle(Vehicle vehicle){
+		if(currentVehicles.size() == 5){
+			if(archiveVehicles.size() < 5)
+				archiveVehicles.add(vehicle);
+			else
+				AreTherefiveArchive = true;
+		}
+		else{
+			currentVehicles.put(vehicle.getID(),new vehicleThread(vehicle));
+			currentVehicles.get(vehicle.getID()).start();
+		}
 		repaint();
 	}
-	public Vehicle getVehicle(){return currentVehicle;}
+//	public Vehicle getVehicle(){return currentVehicle;}
 	/**
 	 * Remove vehicle.
 	 */
-	public void removeVehicle(){
-		currentVehicle = null;
-		vehicleExists = false;
+	public void clear(){
+		currentVehicles = new HashMap<Integer, vehicleThread>();
+		archiveVehicles = new LinkedList<>();
+		AreTherefiveArchive = false;
 		repaint();
+	}
+	public void overlapVehicles(int ID1, int ID2){
+		synchronized (this) {
+			if(currentVehicles.containsKey(ID1) && currentVehicles.containsKey(ID2)){
+				Vehicle[] crashedVehicles = {currentVehicles.get(ID1).getVehicle(),currentVehicles.get(ID2).getVehicle()};
+				if(crashedVehicles[0].getDurability() > crashedVehicles[1].getDurability()){
+					currentVehicles.get(ID1).interrupt();
+					currentVehicles.remove(ID1);
+					infoPanel.setCrashed(ID1, ID2);
+					POP();
+				}else if(crashedVehicles[0].getDurability() < crashedVehicles[1].getDurability()){
+					currentVehicles.get(ID2).interrupt();
+					currentVehicles.remove(ID2);
+					infoPanel.setCrashed(ID2, ID1);
+					POP();
+				}else{
+					for(int i=0;i<2;i++){
+						currentVehicles.get(crashedVehicles[i].getID()).interrupt();
+						currentVehicles.remove(crashedVehicles[i].getID());
+						POP();
+						infoPanel.setCrashed(ID2, ID1);
+						infoPanel.setCrashed(ID1, ID2);
+					}
+				}
+			}
+		}
+		repaint();
+	}
+	public HashMap<Integer, vehicleThread> getActiveVehicles(){return currentVehicles;}
+	public void POP(){
+		if(archiveVehicles.size() > 0)
+			addVehicle(archiveVehicles.poll());
+	}
+	public void interuptAll(){
+		currentVehicles.forEach((id,vThread)->{
+        	vThread.interrupt();
+        });
 	}
 }

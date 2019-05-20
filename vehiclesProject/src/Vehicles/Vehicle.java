@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 /**
@@ -26,9 +27,12 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	protected int wheels;
 	protected Location loc;
 	protected int fuelConsumption;
-	protected CityPanel pan;
+	protected CityPanel city;
 	protected final BufferedImage[] images = new BufferedImage[4];
 	protected float Distance;
+	protected vehicleArea VA;
+//	private static final ArrayList<Vehicle> activeVehicles = new ArrayList<Vehicle>();
+//	private static final HashMap<Integer, vehicleArea> activeVehicles = new HashMap<Integer, vehicleArea>();
 	/**
 	 * A Class Constructor.
 	 * 
@@ -39,15 +43,16 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	 * @param pan
 	 * 		  A CityPanel object.
 	 */
-	public Vehicle(Color color,int numberOfWheels,CityPanel pan){
+	public Vehicle(Color color,int numberOfWheels,CityPanel city){
 		setID(count++);
 		this.Distance = 0;
 		this.col = color;
 		this.wheels = numberOfWheels;
 		this.lights = false;
 		this.loc = new Location();
-		this.pan = pan;
+		this.city = city;
 		loadImages();
+		this.VA = new vehicleArea(loc.getPoint(), loc.getOrientation());
 	}
 	/**
 	 * Get Current Location.
@@ -55,6 +60,18 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	 * @return Current Location.
 	 */
 	public Location getCurLocation(){return this.loc;}
+	public int overlapVehicle(){
+		ArrayList<vehicleThread> activeVehicles = new ArrayList<vehicleThread>(this.city.getActiveVehicles().values());
+		
+		for(int i=0;i<activeVehicles.size();i++){
+			if(this.id == activeVehicles.get(i).getVehicle().getID())
+				continue;
+			if(vehicleArea.overlaps(this.VA,activeVehicles.get(i).getVehicle().getVehicleArea())){
+				return activeVehicles.get(i).getVehicle().getID();
+			}
+		}
+		return -1;
+	}
 	/**
 	 * Change a vehicles Location,and kilometer.
 	 * @param p
@@ -66,6 +83,7 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 			return false;
 		this.Distance += getCurLocation().getPoint().getDistance(p);
 		getCurLocation().setPoint(p);
+		this.VA.setNewPoint(getCurLocation().getPoint(), getCurLocation().getOrientation());
 		return true;
 	}
 	/**
@@ -163,20 +181,29 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 			}
 			this.drive(p);
 		}
-		pan.repaint();
+		else
+			synchronized(this){
+				try{
+					this.wait();
+				}
+				catch(InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		city.repaint();
 	}
 	/**
 	 * Drawing object on a road.
 	 */
 	public void drawObject(Graphics g) {
 		if(loc.getOrientation()==Orientation.North)
-			g.drawImage(images[0], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE, SIZE*2, pan);
+			g.drawImage(images[0], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE, SIZE*2, city);
 		else if(this.getCurLocation().getOrientation()==Orientation.South)
-			g.drawImage(images[1], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE, SIZE*2, pan);
+			g.drawImage(images[1], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE, SIZE*2, city);
 		else if(this.getCurLocation().getOrientation()==Orientation.East)
-			g.drawImage(images[2], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE*2, SIZE, pan);
+			g.drawImage(images[2], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE*2, SIZE, city);
 		else if(this.getCurLocation().getOrientation()==Orientation.West)
-			g.drawImage(images[3], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE*2, SIZE, pan);
+			g.drawImage(images[3], this.getCurLocation().getPoint().getX(), this.getCurLocation().getPoint().getY(), SIZE*2, SIZE, city);
 	}
 	/**
 	 * The next location of the object.
@@ -185,12 +212,16 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	 */
 	public Point nextLocation(){
 		if(loc.getOrientation() == Orientation.East){
+			
 			return new Point(loc.getPoint().getX()+getSpeed(),loc.getPoint().getY());
 		}else if(loc.getOrientation() == Orientation.North){
+			
 			return new Point(loc.getPoint().getX(),loc.getPoint().getY()-getSpeed());
 		}else if(loc.getOrientation() == Orientation.West){
+			
 			return new Point(loc.getPoint().getX()-getSpeed(),loc.getPoint().getY());
 		}else if(loc.getOrientation() == Orientation.South){
+			
 			return new Point(loc.getPoint().getX(),loc.getPoint().getY()+getSpeed());
 		}
 		return loc.getPoint();
@@ -203,4 +234,6 @@ public abstract class Vehicle implements IMoveable, IDrawable, Cloneable,IVehicl
 	public Object clone() throws CloneNotSupportedException {
 	    return super.clone();
 	}
+	public vehicleArea getVehicleArea(){return this.VA;}
+	public CityPanel getCity(){return this.city;}
 }

@@ -13,4 +13,5 @@ public interface IMoveable {
 	public int getFuelConsumption();
 	public void move(Point p);
 	public boolean moveable();
+	public int getDurability();
 }
