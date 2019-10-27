@@ -86,9 +86,9 @@ public class CityPanel extends JPanel {
 	 * 
 	 * @return vehicle exists.
 	 */
-//	public static boolean thereVehicle(){
-//		return vehicleExists;
-//	}
+	public static boolean thereVehicle(){
+		return vehicleExists;
+	}
 	/**
 	 * Set Vehicle.
 	 * 
