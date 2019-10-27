@@ -108,7 +108,7 @@ public class CityPanel extends JPanel {
 		}
 		repaint();
 	}
-//	public Vehicle getVehicle(){return currentVehicle;}
+	public Vehicle getVehicle(){return currentVehicle;}
 	/**
 	 * Remove vehicle.
 	 */
